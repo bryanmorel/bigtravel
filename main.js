@@ -230,6 +230,12 @@ function updateAllText() {
 
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', () => {
+  // Scroll to top on page load/refresh
+  window.scrollTo(0, 0);
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname);
+  }
+  
   initTheme();
   initLang();
   renderCategoryTabs();

@@ -398,6 +398,7 @@ async function discoverImages(slug) {
   // Prefer real photos (raster formats) only.
   // SVGs are reserved for a single generic placeholder to avoid awkward scaling/text.
   const photoExtensions = ['webp', 'jpg', 'jpeg', 'png'];
+  const renderExtensions = ['svg'];
 
   // Also support a single non-numbered image (e.g., kia-picanto.webp)
   for (const ext of photoExtensions) {
@@ -409,7 +410,7 @@ async function discoverImages(slug) {
   }
 
   for (let i = 1; i <= 5; i++) {
-    for (const ext of photoExtensions) {
+    for (const ext of [...photoExtensions, ...renderExtensions]) {
       const url = `assets/cars/${slug}-${i}.${ext}`;
       if (await imageExists(url)) {
         images.push(url);

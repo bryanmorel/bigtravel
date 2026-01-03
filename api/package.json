@@ -8,8 +8,5 @@
   "engines": {
     "node": ">=18"
   },
-  "dependencies": {
-    "@azure/msal-node": "^2.16.2",
-    "node-fetch": "^2.7.0"
-  }
+  "dependencies": {}
 }

@@ -1,5 +1,4 @@
-const { ConfidentialClientApplication } = require('@azure/msal-node');
-const fetch = require('node-fetch');
+const https = require('https');
 
 function json(res, status, body) {
   res.status = status;
@@ -37,6 +36,42 @@ function parseBody(req) {
     }
   }
   return null;
+}
+
+function httpsRequest(options, postData) {
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => {
+        resolve({ statusCode: res.statusCode, body: data });
+      });
+    });
+    req.on('error', reject);
+    if (postData) req.write(postData);
+    req.end();
+  });
+}
+
+async function getAccessToken(tenantId, clientId, clientSecret) {
+  const tokenData = `client_id=${encodeURIComponent(clientId)}&scope=${encodeURIComponent('https://graph.microsoft.com/.default')}&client_secret=${encodeURIComponent(clientSecret)}&grant_type=client_credentials`;
+
+  const response = await httpsRequest({
+    hostname: 'login.microsoftonline.com',
+    path: `/${tenantId}/oauth2/v2.0/token`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': Buffer.byteLength(tokenData),
+    },
+  }, tokenData);
+
+  if (response.statusCode !== 200) {
+    throw new Error(`Token request failed: ${response.statusCode} - ${response.body}`);
+  }
+
+  const tokenResponse = JSON.parse(response.body);
+  return tokenResponse.access_token;
 }
 
 function formatEmailHtml(data) {
@@ -99,22 +134,9 @@ async function sendMailWithGraph(toEmail, fromEmail, replyTo, subject, htmlBody,
     throw new Error('Missing Azure AD credentials (AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET)');
   }
 
-  const msalConfig = {
-    auth: {
-      clientId,
-      clientSecret,
-      authority: `https://login.microsoftonline.com/${tenantId}`,
-    },
-  };
-
-  const cca = new ConfidentialClientApplication(msalConfig);
-  const tokenResponse = await cca.acquireTokenByClientCredential({
-    scopes: ['https://graph.microsoft.com/.default'],
-  });
-
-  if (!tokenResponse || !tokenResponse.accessToken) {
-    throw new Error('Failed to acquire access token');
-  }
+  context.log('Acquiring access token...');
+  const accessToken = await getAccessToken(tenantId, clientId, clientSecret);
+  context.log('Access token acquired successfully');
 
   const message = {
     message: {
@@ -137,23 +159,26 @@ async function sendMailWithGraph(toEmail, fromEmail, replyTo, subject, htmlBody,
     saveToSentItems: false,
   };
 
-  const response = await fetch(
-    `https://graph.microsoft.com/v1.0/users/${fromEmail}/sendMail`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${tokenResponse.accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(message),
-    }
-  );
+  const messageBody = JSON.stringify(message);
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    context.log.error('Graph API error:', response.status, errorText);
-    throw new Error(`Graph API error: ${response.status}`);
+  context.log('Sending email via Graph API...');
+  const response = await httpsRequest({
+    hostname: 'graph.microsoft.com',
+    path: `/v1.0/users/${encodeURIComponent(fromEmail)}/sendMail`,
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(messageBody),
+    },
+  }, messageBody);
+
+  if (response.statusCode !== 202 && response.statusCode !== 200) {
+    context.log.error('Graph API error:', response.statusCode, response.body);
+    throw new Error(`Graph API error: ${response.statusCode} - ${response.body}`);
   }
+
+  context.log('Email sent successfully');
 }
 
 module.exports = async function (context, req) {

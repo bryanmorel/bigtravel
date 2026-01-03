@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Big Travel car rental — request a reservation for your trip." />
+    <title>Big Travel | Car Rental</title>
+
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+
+    <script>
+      // Prevent theme flash
+      (() => {
+        const stored = localStorage.getItem('bt_theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Big Travel Home">
+          <img class="brand-logo" src="assets/logo.png" alt="Big Travel" />
+          <span class="brand-name">Big Travel</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a class="nav-link" href="#fleet" data-i18n="nav.fleet">Fleet</a>
+          <a class="nav-link" href="#how" data-i18n="nav.how">How it works</a>
+          <a class="nav-link" href="#request" data-i18n="nav.request">Request</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="btn btn-ghost" id="langToggle" type="button" aria-label="Change language">
+            <span class="btn-icon" aria-hidden="true">🌐</span>
+            <span id="langLabel">ES</span>
+          </button>
+
+          <button class="btn btn-ghost" id="themeToggle" type="button" aria-label="Toggle theme">
+            <span class="btn-icon" aria-hidden="true">◐</span>
+          </button>
+
+          <a class="btn btn-primary" href="#request" data-i18n="cta.request">Request reservation</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="badge" data-i18n="hero.badge">Simple, fast reservation requests</p>
+            <h1 class="hero-title" data-i18n="hero.title">Car rental for your next trip</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
+              Choose the car size and features you need, share your dates, and we’ll confirm availability and pricing.
+            </p>
+
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#request" data-i18n="cta.request">Request reservation</a>
+              <a class="btn btn-secondary" href="#fleet" data-i18n="cta.viewFleet">View fleet</a>
+            </div>
+
+            <p class="disclaimer" data-i18n="hero.disclaimer">
+              Vehicles shown are examples. Exact model depends on availability.
+            </p>
+          </div>
+
+          <div class="hero-card" role="region" aria-label="Quick highlights">
+            <ul class="stats">
+              <li class="stat">
+                <span class="stat-k" data-i18n="stats.support">Fast response</span>
+                <span class="stat-v" data-i18n="stats.supportDesc">We reply within business hours</span>
+              </li>
+              <li class="stat">
+                <span class="stat-k" data-i18n="stats.fleet">Mixed fleet</span>
+                <span class="stat-v" data-i18n="stats.fleetDesc">City cars to SUVs / 4x4</span>
+              </li>
+              <li class="stat">
+                <span class="stat-k" data-i18n="stats.mobile">Mobile-first</span>
+                <span class="stat-v" data-i18n="stats.mobileDesc">Easy booking from your phone</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="fleet">
+        <div class="container">
+          <div class="section-head">
+            <h2 data-i18n="fleet.title">Fleet & examples</h2>
+            <p data-i18n="fleet.subtitle">
+              Pick a category (size & features). We’ll match you with the closest available vehicle from our fleet.
+            </p>
+          </div>
+
+          <div class="category-grid" id="categoryGrid" aria-label="Vehicle categories"></div>
+
+          <div class="fleet-note">
+            <details class="details">
+              <summary data-i18n="fleet.seeModels">See our current fleet models</summary>
+              <div class="models" id="modelList"></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="how">
+        <div class="container">
+          <div class="section-head">
+            <h2 data-i18n="how.title">How it works</h2>
+          </div>
+
+          <ol class="steps">
+            <li class="step">
+              <h3 data-i18n="how.step1Title">1) Tell us your needs</h3>
+              <p data-i18n="how.step1Desc">Dates, pickup/dropoff, category, passengers, and transmission.</p>
+            </li>
+            <li class="step">
+              <h3 data-i18n="how.step2Title">2) We confirm options</h3>
+              <p data-i18n="how.step2Desc">We’ll reply with availability and price for the closest match in our fleet.</p>
+            </li>
+            <li class="step">
+              <h3 data-i18n="how.step3Title">3) Finalize reservation</h3>
+              <p data-i18n="how.step3Desc">We’ll collect the remaining details to complete the booking.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="request">
+        <div class="container">
+          <div class="section-head">
+            <h2 data-i18n="request.title">Request a reservation</h2>
+            <p data-i18n="request.subtitle">Fill out the form and we’ll get back to you.</p>
+          </div>
+
+          <div class="form-layout">
+            <form class="card form" id="reservationForm" novalidate>
+              <div class="grid">
+                <label class="field">
+                  <span class="label" data-i18n="form.name">Full name</span>
+                  <input name="name" type="text" autocomplete="name" required />
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.email">Email</span>
+                  <input name="email" type="email" autocomplete="email" required />
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.phone">Phone / WhatsApp</span>
+                  <input name="phone" type="tel" autocomplete="tel" required />
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.language">Preferred language</span>
+                  <select name="language" required>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.pickupDate">Pickup date</span>
+                  <input name="pickupDate" type="date" required />
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.returnDate">Return date</span>
+                  <input name="returnDate" type="date" required />
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.pickupLocation">Pickup location</span>
+                  <input name="pickupLocation" type="text" required />
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.dropoffLocation">Dropoff location</span>
+                  <input name="dropoffLocation" type="text" required />
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.category">Vehicle category</span>
+                  <select name="category" id="categorySelect" required></select>
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.transmission">Transmission</span>
+                  <select name="transmission" required>
+                    <option value="either" data-i18n="form.transEither">Either</option>
+                    <option value="automatic" data-i18n="form.transAuto">Automatic</option>
+                    <option value="manual" data-i18n="form.transManual">Manual</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.passengers">Passengers</span>
+                  <input name="passengers" type="number" min="1" max="10" value="2" required />
+                </label>
+
+                <label class="field">
+                  <span class="label" data-i18n="form.luggage">Luggage</span>
+                  <input name="luggage" type="number" min="0" max="10" value="1" required />
+                </label>
+
+                <label class="field field-full">
+                  <span class="label" data-i18n="form.notes">Notes (optional)</span>
+                  <textarea name="notes" rows="4" placeholder=""></textarea>
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit" id="submitBtn" data-i18n="form.submit">Send request</button>
+                <p class="form-hint" data-i18n="form.hint">
+                  We’ll contact you to confirm availability and finalize.
+                </p>
+              </div>
+
+              <div class="toast" id="formToast" role="status" aria-live="polite"></div>
+            </form>
+
+            <aside class="card side">
+              <h3 data-i18n="side.title">What we need</h3>
+              <ul class="side-list">
+                <li data-i18n="side.item1">Dates and locations</li>
+                <li data-i18n="side.item2">Category and transmission</li>
+                <li data-i18n="side.item3">Passengers and luggage</li>
+              </ul>
+
+              <p class="disclaimer" data-i18n="side.disclaimer">
+                Your request is not a confirmed booking until we reply.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container footer-inner">
+          <div class="footer-left">
+            <img class="footer-logo" src="assets/logo.png" alt="Big Travel" />
+            <div>
+              <div class="footer-brand">Big Travel</div>
+              <div class="footer-meta" data-i18n="footer.meta">Car rental reservation requests</div>
+            </div>
+          </div>
+
+          <div class="footer-right">
+            <a class="footer-link" href="#request" data-i18n="footer.request">Request</a>
+            <a class="footer-link" href="#fleet" data-i18n="footer.fleet">Fleet</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

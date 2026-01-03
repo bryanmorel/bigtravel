@@ -1,0 +1,14 @@
+{
+  "name": "bigtravel-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Big Travel reservation request API (Azure Functions)",
+  "main": "index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@azure/msal-node": "^2.16.2"
+  }
+}

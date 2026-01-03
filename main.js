@@ -1,313 +1,265 @@
 /* ===== Fleet Data ===== */
 const fleet = [
-  // Compact / Hatchback
-  { slug: 'picanto', name: 'Kia Picanto', category: 'compact', passengers: 4, doors: 4, ac: true },
-  { slug: 'march', name: 'Nissan March', category: 'compact', passengers: 5, doors: 4, ac: true },
-  { slug: 'kwid', name: 'Renault Kwid', category: 'compact', passengers: 5, doors: 4, ac: true, manual: true },
-  { slug: 'onix-hb', name: 'Chevrolet Onix HB', category: 'compact', passengers: 5, doors: 4, ac: true },
-  { slug: 'golf', name: 'Volkswagen Golf', category: 'compact', passengers: 5, doors: 4, ac: true, popular: true },
-  // Sedan
-  { slug: 'onix', name: 'Chevrolet Onix', category: 'sedan', passengers: 5, doors: 4, ac: true },
-  { slug: 'rio', name: 'Kia Rio', category: 'sedan', passengers: 5, doors: 4, ac: true, popular: true },
-  { slug: 'versa', name: 'Nissan Versa', category: 'sedan', passengers: 5, doors: 4, ac: true },
-  { slug: 'mazda2', name: 'Mazda 2 Sedan', category: 'sedan', passengers: 5, doors: 4, ac: true },
-  { slug: 'mazda4', name: 'Mazda 4 Sedan', category: 'sedan', passengers: 5, doors: 4, ac: true },
-  // SUV
-  { slug: 'cx5', name: 'Mazda CX-5', category: 'suv', passengers: 5, doors: 4, ac: true, popular: true },
-  { slug: 'tracker', name: 'Chevrolet Tracker', category: 'suv', passengers: 5, doors: 4, ac: true },
-  { slug: 'sportage', name: 'Kia Sportage', category: 'suv', passengers: 5, doors: 4, ac: true },
-  { slug: 'koleos', name: 'Renault Koleos', category: 'suv', passengers: 5, doors: 4, ac: true },
-  // 4x4 / Large SUV
-  { slug: 'fortuner', name: 'Toyota Fortuner SW4', category: '4x4', passengers: 7, doors: 4, ac: true, popular: true },
-  { slug: '4runner', name: 'Toyota 4Runner', category: '4x4', passengers: 7, doors: 4, ac: true },
-  { slug: 'txl', name: 'Toyota TXL', category: '4x4', passengers: 7, doors: 4, ac: true },
-  { slug: 'trailblazer', name: 'Chevrolet Trailblazer', category: '4x4', passengers: 7, doors: 4, ac: true }
+  { slug: 'kia-picanto', name: 'Kia Picanto', category: 'compact', passengers: 4, doors: 4, ac: true },
+  { slug: 'nissan-march', name: 'Nissan March', category: 'compact', passengers: 5, doors: 4, ac: true },
+  { slug: 'renault-kwid', name: 'Renault Kwid', category: 'compact', passengers: 5, doors: 4, ac: true, manual: true },
+  { slug: 'chevrolet-onix-hb', name: 'Chevrolet Onix HB', category: 'compact', passengers: 5, doors: 4, ac: true },
+  { slug: 'vw-golf', name: 'Volkswagen Golf', category: 'compact', passengers: 5, doors: 4, ac: true, popular: true },
+  { slug: 'chevrolet-onix', name: 'Chevrolet Onix', category: 'sedan', passengers: 5, doors: 4, ac: true },
+  { slug: 'kia-rio', name: 'Kia Rio', category: 'sedan', passengers: 5, doors: 4, ac: true, popular: true },
+  { slug: 'nissan-versa', name: 'Nissan Versa', category: 'sedan', passengers: 5, doors: 4, ac: true },
+  { slug: 'mazda-2', name: 'Mazda 2 Sedan', category: 'sedan', passengers: 5, doors: 4, ac: true },
+  { slug: 'mazda-4', name: 'Mazda 4 Sedan', category: 'sedan', passengers: 5, doors: 4, ac: true },
+  { slug: 'mazda-cx5', name: 'Mazda CX-5', category: 'suv', passengers: 5, doors: 4, ac: true, popular: true },
+  { slug: 'chevrolet-tracker', name: 'Chevrolet Tracker', category: 'suv', passengers: 5, doors: 4, ac: true },
+  { slug: 'kia-sportage', name: 'Kia Sportage', category: 'suv', passengers: 5, doors: 4, ac: true },
+  { slug: 'renault-koleos', name: 'Renault Koleos', category: 'suv', passengers: 5, doors: 4, ac: true },
+  { slug: 'toyota-fortuner', name: 'Toyota Fortuner SW4', category: '4x4', passengers: 7, doors: 4, ac: true, popular: true },
+  { slug: 'toyota-4runner', name: 'Toyota 4Runner', category: '4x4', passengers: 7, doors: 4, ac: true },
+  { slug: 'toyota-txl', name: 'Toyota TXL', category: '4x4', passengers: 7, doors: 4, ac: true },
+  { slug: 'chevrolet-trailblazer', name: 'Chevrolet Trailblazer', category: '4x4', passengers: 7, doors: 4, ac: true }
 ];
 
 const categories = {
-  all:     { en: 'All Vehicles', es: 'Todos' },
+  all: { en: 'All', es: 'Todos' },
   compact: { en: 'Compact', es: 'Compactos' },
-  sedan:   { en: 'Sedans', es: 'Sedanes' },
-  suv:     { en: 'SUVs', es: 'SUVs' },
-  '4x4':   { en: '4x4 / Large', es: '4x4 / Grandes' }
+  sedan: { en: 'Sedans', es: 'Sedanes' },
+  suv: { en: 'SUVs', es: 'SUVs' },
+  '4x4': { en: '4x4', es: '4x4' }
 };
 
-/* ===== Translations ===== */
+/* ===== i18n Dictionary ===== */
 const i18n = {
   en: {
-    // Header
     'nav.fleet': 'Fleet',
-    'nav.howItWorks': 'How It Works',
+    'nav.how': 'How it works',
     'nav.reserve': 'Reserve',
-    'header.cta': 'Reserve Now',
-    
-    // Hero
+    'nav.cta': 'Reserve Now',
     'hero.badge': 'Eje Cafetero, Colombia',
-    'hero.title': 'Car Rental in the Coffee Region',
-    'hero.subtitle': 'Premium vehicles for exploring Colombia\'s Eje Cafetero. Airport pickup at Pereira, Armenia & Manizales.',
-    'hero.cta.primary': 'Reserve Your Vehicle',
-    'hero.cta.secondary': 'View Fleet',
-    'trust.airport': 'Multi-Airport Pickup',
-    'trust.airport.desc': 'Pereira, Armenia, Manizales',
+    'hero.title': 'Premium Car Rental in Colombia\'s Coffee Region',
+    'hero.subtitle': 'Explore the Eje Cafetero with our premium fleet. Airport pickup available in Pereira, Armenia & Manizales.',
+    'hero.cta': 'Browse Fleet',
+    'trust.airports': '3 Airports',
+    'trust.airports.desc': 'Pereira · Armenia · Manizales',
     'trust.insurance': 'Full Insurance',
     'trust.insurance.desc': 'Comprehensive coverage included',
-    'trust.support': '24/7 Support',
-    'trust.support.desc': 'WhatsApp: 323 224 5812',
-    
-    // Fleet
+    'trust.response': 'Fast Response',
+    'trust.response.desc': 'Confirmation within 2-4 hours',
     'fleet.title': 'Our Fleet',
-    'fleet.subtitle': 'Select the perfect vehicle for your Eje Cafetero adventure',
-    'fleet.note': 'Vehicle availability may vary. We\'ll confirm your specific vehicle after reviewing your request.',
-    'fleet.manual': 'Manual',
-    'fleet.popular': 'Popular',
+    'fleet.subtitle': 'Select a vehicle to start your reservation',
+    'fleet.showMore': 'Show More Vehicles',
+    'fleet.note': 'Vehicles shown are examples. Exact model depends on availability.',
+    'fleet.tag': 'Example vehicle (or similar)',
     'fleet.passengers': 'passengers',
     'fleet.doors': 'doors',
     'fleet.ac': 'A/C',
-    
-    // Steps
-    'steps.title': 'How It Works',
-    'steps.subtitle': 'Three simple steps to get on the road',
-    'step1.title': 'Submit Request',
-    'step1.desc': 'Fill out the reservation form with your dates and vehicle preference.',
-    'step2.title': 'Get Confirmation',
-    'step2.desc': 'We\'ll review availability and send you a confirmation within 24 hours.',
-    'step3.title': 'Pick Up & Drive',
-    'step3.desc': 'Meet us at the airport or office to get your keys and hit the road.',
-    
-    // Form
-    'form.title': 'Reserve Your Vehicle',
-    'form.subtitle': 'Complete the form below and we\'ll confirm availability',
-    'form.section.trip': 'Trip Details',
-    'form.section.vehicle': 'Vehicle Preference',
-    'form.section.contact': 'Your Information',
-    'form.pickup': 'Pickup Date',
-    'form.return': 'Return Date',
-    'form.pickupLoc': 'Pickup Location',
-    'form.returnLoc': 'Return Location',
-    'form.loc.pereira': 'Pereira Airport (PEI)',
-    'form.loc.armenia': 'Armenia Airport (AXM)',
-    'form.loc.manizales': 'Manizales Airport (MZL)',
-    'form.loc.office': 'Cartago Office',
-    'form.vehicle': 'Preferred Vehicle',
-    'form.vehicle.any': 'Any Available',
+    'fleet.manual': 'Manual',
+    'stepper.title': 'Reserve Your Vehicle',
+    'stepper.subtitle': 'Complete the steps below to request a reservation',
+    'step.vehicle': 'Vehicle',
+    'step.trip': 'Trip',
+    'step.prefs': 'Preferences',
+    'step.contact': 'Contact',
+    'step1.title': 'Select Your Vehicle',
+    'step1.noVehicle': 'No vehicle selected yet',
+    'step1.browse': 'Browse Fleet',
+    'step2.title': 'Trip Details',
+    'step3.title': 'Vehicle Preferences',
+    'step4.title': 'Your Information',
+    'form.pickupDate': 'Pickup Date',
+    'form.returnDate': 'Return Date',
+    'form.pickupLocation': 'Pickup Location',
+    'form.dropoffLocation': 'Drop-off Location',
+    'form.transmission': 'Transmission',
+    'form.automatic': 'Automatic',
+    'form.manual': 'Manual',
+    'form.any': 'No preference',
+    'form.passengers': 'Passengers',
+    'form.luggage': 'Luggage',
+    'form.luggage.small': 'Small (1-2 bags)',
+    'form.luggage.medium': 'Medium (3-4 bags)',
+    'form.luggage.large': 'Large (5+ bags)',
     'form.name': 'Full Name',
     'form.email': 'Email',
     'form.phone': 'Phone / WhatsApp',
-    'form.notes': 'Additional Notes',
-    'form.notes.placeholder': 'Flight number, special requests, questions...',
-    'form.submit': 'Send Reservation Request',
-    'form.submitting': 'Sending...',
-    'form.privacy': 'We respect your privacy and will only use this information for your reservation.',
+    'form.language': 'Preferred Language',
+    'form.notes': 'Notes (flight number, special requests)',
     'form.required': 'This field is required',
     'form.invalidEmail': 'Please enter a valid email',
-    'form.invalidDate': 'Return date must be after pickup date',
-    
-    // Sidebar
-    'sidebar.whatsIncluded': 'What\'s Included',
-    'sidebar.inc.insurance': 'Comprehensive insurance',
-    'sidebar.inc.mileage': 'Unlimited mileage',
-    'sidebar.inc.support': '24/7 roadside assistance',
-    'sidebar.inc.delivery': 'Airport delivery/pickup',
-    'sidebar.inc.cleaning': 'Sanitized vehicle',
-    'sidebar.nextSteps': 'What Happens Next',
-    'sidebar.next.1': 'We\'ll review your request',
-    'sidebar.next.2': 'Confirm vehicle availability',
-    'sidebar.next.3': 'Send you a quote via email',
-    'sidebar.next.4': 'Confirm pickup details',
-    'sidebar.note': 'Most requests are confirmed within 2-4 hours during business hours.',
-    
-    // Success Modal
-    'success.title': 'Request Received!',
-    'success.message': 'Thank you for choosing Big Travel. We\'ve received your reservation request and will contact you shortly.',
-    'success.steps.title': 'What\'s Next?',
-    'success.step.1': 'Check your email for confirmation',
-    'success.step.2': 'We\'ll verify vehicle availability',
-    'success.step.3': 'Receive your final quote within 24 hours',
-    'success.step.4': 'Confirm your booking',
+    'form.invalidDate': 'Return date must be after pickup',
+    'review.title': 'Review Your Request',
+    'review.vehicle': 'Vehicle',
+    'review.dates': 'Dates',
+    'review.pickup': 'Pickup',
+    'review.dropoff': 'Drop-off',
+    'stepper.back': 'Back',
+    'stepper.next': 'Next',
+    'stepper.submit': 'Send Request',
+    'stepper.submitting': 'Sending...',
+    'how.title': 'How It Works',
+    'how.subtitle': 'Three simple steps to get on the road',
+    'how.step1.title': 'Choose & Request',
+    'how.step1.desc': 'Browse our fleet, select your vehicle, and submit a reservation request.',
+    'how.step2.title': 'Get Confirmation',
+    'how.step2.desc': 'We\'ll verify availability and send you pricing within 2-4 hours.',
+    'how.step3.title': 'Pick Up & Drive',
+    'how.step3.desc': 'Meet us at your chosen location and hit the road!',
+    'success.title': 'Request Sent!',
+    'success.message': 'Thank you! We\'ll review your request and contact you within 2-4 hours.',
     'success.close': 'Close',
-    
-    // Footer
-    'footer.tagline': 'Premium car rental in Eje Cafetero, Colombia',
-    'footer.copy': '© 2026 Big Travel Rent A Car. All rights reserved.',
-    'footer.address': 'Calle 16 #5-46, Cartago, Valle del Cauca',
-    'footer.phone': 'WhatsApp: 323 224 5812',
-    
-    // Mobile CTA
-    'mobile.cta': 'Reserve Now'
+    'footer.tagline': 'Premium car rental',
+    'footer.rights': 'All rights reserved.'
   },
   es: {
-    // Header
     'nav.fleet': 'Flota',
-    'nav.howItWorks': 'Cómo Funciona',
+    'nav.how': 'Cómo funciona',
     'nav.reserve': 'Reservar',
-    'header.cta': 'Reservar',
-    
-    // Hero
+    'nav.cta': 'Reservar Ahora',
     'hero.badge': 'Eje Cafetero, Colombia',
-    'hero.title': 'Alquiler de Autos en el Eje Cafetero',
-    'hero.subtitle': 'Vehículos premium para explorar el Eje Cafetero. Recogida en aeropuertos de Pereira, Armenia y Manizales.',
-    'hero.cta.primary': 'Reserva Tu Vehículo',
-    'hero.cta.secondary': 'Ver Flota',
-    'trust.airport': 'Multi-Aeropuerto',
-    'trust.airport.desc': 'Pereira, Armenia, Manizales',
+    'hero.title': 'Alquiler de Autos Premium en el Eje Cafetero',
+    'hero.subtitle': 'Explora el Eje Cafetero con nuestra flota premium. Recogida disponible en Pereira, Armenia y Manizales.',
+    'hero.cta': 'Ver Flota',
+    'trust.airports': '3 Aeropuertos',
+    'trust.airports.desc': 'Pereira · Armenia · Manizales',
     'trust.insurance': 'Seguro Completo',
     'trust.insurance.desc': 'Cobertura completa incluida',
-    'trust.support': 'Soporte 24/7',
-    'trust.support.desc': 'WhatsApp: 323 224 5812',
-    
-    // Fleet
+    'trust.response': 'Respuesta Rápida',
+    'trust.response.desc': 'Confirmación en 2-4 horas',
     'fleet.title': 'Nuestra Flota',
-    'fleet.subtitle': 'Selecciona el vehículo perfecto para tu aventura en el Eje Cafetero',
-    'fleet.note': 'La disponibilidad puede variar. Confirmaremos tu vehículo después de revisar tu solicitud.',
-    'fleet.manual': 'Manual',
-    'fleet.popular': 'Popular',
+    'fleet.subtitle': 'Selecciona un vehículo para iniciar tu reserva',
+    'fleet.showMore': 'Ver Más Vehículos',
+    'fleet.note': 'Los vehículos mostrados son ejemplos. El modelo exacto depende de disponibilidad.',
+    'fleet.tag': 'Vehículo de referencia (o similar)',
     'fleet.passengers': 'pasajeros',
     'fleet.doors': 'puertas',
     'fleet.ac': 'A/C',
-    
-    // Steps
-    'steps.title': 'Cómo Funciona',
-    'steps.subtitle': 'Tres simples pasos para ponerte en camino',
-    'step1.title': 'Envía Solicitud',
-    'step1.desc': 'Completa el formulario con tus fechas y preferencia de vehículo.',
-    'step2.title': 'Recibe Confirmación',
-    'step2.desc': 'Revisaremos disponibilidad y te enviaremos confirmación en 24 horas.',
-    'step3.title': 'Recoge y Conduce',
-    'step3.desc': 'Encuéntranos en el aeropuerto u oficina para recibir tus llaves.',
-    
-    // Form
-    'form.title': 'Reserva Tu Vehículo',
-    'form.subtitle': 'Completa el formulario y confirmaremos disponibilidad',
-    'form.section.trip': 'Detalles del Viaje',
-    'form.section.vehicle': 'Preferencia de Vehículo',
-    'form.section.contact': 'Tu Información',
-    'form.pickup': 'Fecha de Recogida',
-    'form.return': 'Fecha de Devolución',
-    'form.pickupLoc': 'Lugar de Recogida',
-    'form.returnLoc': 'Lugar de Devolución',
-    'form.loc.pereira': 'Aeropuerto Pereira',
-    'form.loc.armenia': 'Aeropuerto Armenia',
-    'form.loc.manizales': 'Aeropuerto Manizales',
-    'form.loc.office': 'Oficina Cartago',
-    'form.vehicle': 'Vehículo Preferido',
-    'form.vehicle.any': 'Cualquier Disponible',
+    'fleet.manual': 'Manual',
+    'stepper.title': 'Reserva Tu Vehículo',
+    'stepper.subtitle': 'Completa los pasos para solicitar una reserva',
+    'step.vehicle': 'Vehículo',
+    'step.trip': 'Viaje',
+    'step.prefs': 'Preferencias',
+    'step.contact': 'Contacto',
+    'step1.title': 'Selecciona Tu Vehículo',
+    'step1.noVehicle': 'Ningún vehículo seleccionado',
+    'step1.browse': 'Ver Flota',
+    'step2.title': 'Detalles del Viaje',
+    'step3.title': 'Preferencias del Vehículo',
+    'step4.title': 'Tu Información',
+    'form.pickupDate': 'Fecha de Recogida',
+    'form.returnDate': 'Fecha de Devolución',
+    'form.pickupLocation': 'Lugar de Recogida',
+    'form.dropoffLocation': 'Lugar de Devolución',
+    'form.transmission': 'Transmisión',
+    'form.automatic': 'Automática',
+    'form.manual': 'Manual',
+    'form.any': 'Sin preferencia',
+    'form.passengers': 'Pasajeros',
+    'form.luggage': 'Equipaje',
+    'form.luggage.small': 'Pequeño (1-2 maletas)',
+    'form.luggage.medium': 'Mediano (3-4 maletas)',
+    'form.luggage.large': 'Grande (5+ maletas)',
     'form.name': 'Nombre Completo',
     'form.email': 'Correo Electrónico',
     'form.phone': 'Teléfono / WhatsApp',
-    'form.notes': 'Notas Adicionales',
-    'form.notes.placeholder': 'Número de vuelo, solicitudes especiales, preguntas...',
-    'form.submit': 'Enviar Solicitud de Reserva',
-    'form.submitting': 'Enviando...',
-    'form.privacy': 'Respetamos tu privacidad y solo usaremos esta información para tu reserva.',
+    'form.language': 'Idioma Preferido',
+    'form.notes': 'Notas (número de vuelo, solicitudes especiales)',
     'form.required': 'Este campo es requerido',
     'form.invalidEmail': 'Por favor ingresa un email válido',
-    'form.invalidDate': 'La fecha de devolución debe ser posterior a la de recogida',
-    
-    // Sidebar
-    'sidebar.whatsIncluded': '¿Qué Incluye?',
-    'sidebar.inc.insurance': 'Seguro completo',
-    'sidebar.inc.mileage': 'Kilometraje ilimitado',
-    'sidebar.inc.support': 'Asistencia en carretera 24/7',
-    'sidebar.inc.delivery': 'Entrega/recogida en aeropuerto',
-    'sidebar.inc.cleaning': 'Vehículo sanitizado',
-    'sidebar.nextSteps': '¿Qué Sigue?',
-    'sidebar.next.1': 'Revisaremos tu solicitud',
-    'sidebar.next.2': 'Confirmaremos disponibilidad',
-    'sidebar.next.3': 'Te enviaremos cotización por email',
-    'sidebar.next.4': 'Confirmaremos detalles de recogida',
-    'sidebar.note': 'La mayoría de solicitudes se confirman en 2-4 horas en horario laboral.',
-    
-    // Success Modal
-    'success.title': '¡Solicitud Recibida!',
-    'success.message': 'Gracias por elegir Big Travel. Hemos recibido tu solicitud y te contactaremos pronto.',
-    'success.steps.title': '¿Qué Sigue?',
-    'success.step.1': 'Revisa tu email para confirmación',
-    'success.step.2': 'Verificaremos disponibilidad',
-    'success.step.3': 'Recibirás tu cotización en 24 horas',
-    'success.step.4': 'Confirma tu reserva',
+    'form.invalidDate': 'La fecha de devolución debe ser posterior',
+    'review.title': 'Revisa Tu Solicitud',
+    'review.vehicle': 'Vehículo',
+    'review.dates': 'Fechas',
+    'review.pickup': 'Recogida',
+    'review.dropoff': 'Devolución',
+    'stepper.back': 'Atrás',
+    'stepper.next': 'Siguiente',
+    'stepper.submit': 'Enviar Solicitud',
+    'stepper.submitting': 'Enviando...',
+    'how.title': 'Cómo Funciona',
+    'how.subtitle': 'Tres simples pasos para ponerte en camino',
+    'how.step1.title': 'Elige y Solicita',
+    'how.step1.desc': 'Explora nuestra flota, selecciona tu vehículo y envía una solicitud de reserva.',
+    'how.step2.title': 'Recibe Confirmación',
+    'how.step2.desc': 'Verificamos disponibilidad y te enviamos cotización en 2-4 horas.',
+    'how.step3.title': 'Recoge y Conduce',
+    'how.step3.desc': '¡Encuéntranos en tu ubicación elegida y sal a la carretera!',
+    'success.title': '¡Solicitud Enviada!',
+    'success.message': '¡Gracias! Revisaremos tu solicitud y te contactaremos en 2-4 horas.',
     'success.close': 'Cerrar',
-    
-    // Footer
-    'footer.tagline': 'Alquiler de autos premium en el Eje Cafetero, Colombia',
-    'footer.copy': '© 2026 Big Travel Rent A Car. Todos los derechos reservados.',
-    'footer.address': 'Calle 16 #5-46, Cartago, Valle del Cauca',
-    'footer.phone': 'WhatsApp: 323 224 5812',
-    
-    // Mobile CTA
-    'mobile.cta': 'Reservar Ahora'
+    'footer.tagline': 'Alquiler de autos premium',
+    'footer.rights': 'Todos los derechos reservados.'
   }
 };
 
 /* ===== State ===== */
-let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('es') ? 'es' : 'en');
+let lang = localStorage.getItem('bt_lang') || (navigator.language.startsWith('es') ? 'es' : 'en');
 let currentCategory = 'all';
-let carImages = {}; // Cache for discovered images
+let visibleCount = 6;
+let selectedVehicle = null;
+let currentStep = 1;
+const imageCache = {};
 
-/* ===== Translation Helper ===== */
+/* ===== Translation ===== */
 function t(key) {
-  return i18n[currentLang]?.[key] || i18n['en']?.[key] || key;
-}
-
-/* ===== DOM Ready ===== */
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  initLanguage();
-  renderCategoryTabs();
-  renderFleet();
-  populateVehicleSelect();
-  initForm();
-  initDatePickers();
-  updateAllText();
-});
-
-/* ===== Theme ===== */
-function initTheme() {
-  const saved = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = saved || (prefersDark ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', theme);
-}
-
-function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-}
-
-/* ===== Language ===== */
-function initLanguage() {
-  document.documentElement.lang = currentLang;
-  const btn = document.getElementById('langBtn');
-  if (btn) {
-    btn.textContent = currentLang === 'en' ? 'ES' : 'EN';
+  const val = i18n[lang]?.[key] ?? i18n['en']?.[key];
+  if (val === undefined) {
+    console.warn(`[i18n] Missing key: ${key}`);
+    return key;
   }
-}
-
-function toggleLanguage() {
-  currentLang = currentLang === 'en' ? 'es' : 'en';
-  localStorage.setItem('lang', currentLang);
-  document.documentElement.lang = currentLang;
-  
-  const btn = document.getElementById('langBtn');
-  if (btn) {
-    btn.textContent = currentLang === 'en' ? 'ES' : 'EN';
-  }
-  
-  updateAllText();
-  renderCategoryTabs();
-  renderFleet();
-  populateVehicleSelect();
+  return val;
 }
 
 function updateAllText() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
+    const key = el.dataset.i18n;
+    const text = t(key);
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-      el.placeholder = t(key);
+      el.placeholder = text;
     } else {
-      el.textContent = t(key);
+      el.textContent = text;
     }
+  });
+}
+
+/* ===== Init ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initLang();
+  renderCategoryTabs();
+  renderFleet();
+  initStepper();
+  initDatePickers();
+  updateAllText();
+  setupObserver();
+});
+
+/* ===== Theme ===== */
+function initTheme() {
+  document.getElementById('themeToggle')?.addEventListener('click', () => {
+    const current = document.documentElement.dataset.theme;
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('bt_theme', next);
+  });
+}
+
+/* ===== Language ===== */
+function initLang() {
+  document.documentElement.lang = lang;
+  const label = document.getElementById('langLabel');
+  if (label) label.textContent = lang === 'en' ? 'ES' : 'EN';
+
+  document.getElementById('langToggle')?.addEventListener('click', () => {
+    lang = lang === 'en' ? 'es' : 'en';
+    localStorage.setItem('bt_lang', lang);
+    document.documentElement.lang = lang;
+    if (label) label.textContent = lang === 'en' ? 'ES' : 'EN';
+    updateAllText();
+    renderCategoryTabs();
+    renderFleet();
+    updateSelectedVehicleUI();
+    updateReviewSummary();
   });
 }
 
@@ -315,39 +267,134 @@ function updateAllText() {
 function renderCategoryTabs() {
   const container = document.getElementById('categoryTabs');
   if (!container) return;
-  
   container.innerHTML = Object.entries(categories).map(([key, labels]) => `
-    <button class="category-tab ${key === currentCategory ? 'active' : ''}" 
-            data-category="${key}"
-            onclick="filterCategory('${key}')">
-      ${labels[currentLang]}
+    <button class="category-tab ${key === currentCategory ? 'active' : ''}" data-cat="${key}">
+      ${labels[lang]}
     </button>
   `).join('');
-}
 
-function filterCategory(cat) {
-  currentCategory = cat;
-  document.querySelectorAll('.category-tab').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.category === cat);
+  container.querySelectorAll('.category-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentCategory = btn.dataset.cat;
+      visibleCount = 6;
+      container.querySelectorAll('.category-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderFleet();
+    });
   });
-  renderFleet();
 }
 
-/* ===== Image Discovery ===== */
-async function discoverImages(slug) {
-  if (carImages[slug]) return carImages[slug];
+/* ===== Fleet Rendering ===== */
+function renderFleet() {
+  const grid = document.getElementById('fleetGrid');
+  const showMoreBtn = document.getElementById('showMoreBtn');
+  if (!grid) return;
+
+  const filtered = currentCategory === 'all' ? fleet : fleet.filter(c => c.category === currentCategory);
+  const toShow = filtered.slice(0, visibleCount);
   
-  const images = [];
-  const extensions = ['webp', 'jpg', 'png'];
-  
-  // Try main image
-  // Only check webp for speed - no numbered variants to minimize requests
-  const url = `assets/cars/${slug}.webp`;
-  if (await imageExists(url)) {
-    images.push(url);
+  grid.innerHTML = toShow.map(car => createCarCard(car)).join('');
+
+  // Show more button visibility
+  if (showMoreBtn) {
+    showMoreBtn.style.display = visibleCount < filtered.length ? 'inline-flex' : 'none';
+    showMoreBtn.onclick = () => {
+      visibleCount += 6;
+      renderFleet();
+    };
   }
-  
-  carImages[slug] = images;
+
+  // Card click handlers
+  grid.querySelectorAll('.car-card').forEach(card => {
+    card.addEventListener('click', () => selectVehicle(card.dataset.slug));
+  });
+
+  // Lazy load images
+  grid.querySelectorAll('.car-card').forEach(card => {
+    observeCard(card);
+  });
+}
+
+function createCarCard(car) {
+  const catLabel = categories[car.category]?.[lang] || car.category;
+  return `
+    <div class="car-card ${selectedVehicle?.slug === car.slug ? 'selected' : ''}" data-slug="${car.slug}" data-name="${car.name}" data-category="${car.category}">
+      <div class="car-image loading" id="img-${car.slug}">
+        <div class="car-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-2.9-5.2A2 2 0 0013.4 4H10a2 2 0 00-1.7.8L5.5 10H3c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h2"/>
+            <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+          </svg>
+        </div>
+      </div>
+      <div class="car-info">
+        <div class="car-name">${car.name}</div>
+        <div class="car-category">${catLabel}</div>
+        <div class="car-tag">${t('fleet.tag')}</div>
+        <div class="car-specs">
+          <span class="car-spec">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+            ${car.passengers} ${t('fleet.passengers')}
+          </span>
+          <span class="car-spec">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            ${car.doors} ${t('fleet.doors')}
+          </span>
+          ${car.ac ? `<span class="car-spec">${t('fleet.ac')}</span>` : ''}
+          ${car.manual ? `<span class="car-spec">${t('fleet.manual')}</span>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ===== Lazy Image Loading ===== */
+let observer;
+function setupObserver() {
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const card = entry.target;
+        const slug = card.dataset.slug;
+        loadCarImages(slug);
+        observer.unobserve(card);
+      }
+    });
+  }, { rootMargin: '100px' });
+}
+
+function observeCard(card) {
+  if (observer) observer.observe(card);
+}
+
+async function loadCarImages(slug) {
+  if (imageCache[slug]) {
+    applyImages(slug, imageCache[slug]);
+    return;
+  }
+
+  const images = await discoverImages(slug);
+  imageCache[slug] = images;
+  applyImages(slug, images);
+}
+
+async function discoverImages(slug) {
+  const images = [];
+  const extensions = ['webp', 'jpg', 'jpeg', 'png'];
+
+  for (let i = 1; i <= 5; i++) {
+    for (const ext of extensions) {
+      const url = `assets/cars/${slug}-${i}.${ext}`;
+      if (await imageExists(url)) {
+        images.push(url);
+        break;
+      }
+    }
+  }
   return images;
 }
 
@@ -360,316 +407,282 @@ function imageExists(url) {
   });
 }
 
-/* ===== Fleet Rendering ===== */
-async function renderFleet() {
-  const container = document.getElementById('fleetGrid');
+function applyImages(slug, images) {
+  const container = document.getElementById(`img-${slug}`);
   if (!container) return;
+  container.classList.remove('loading');
+
+  if (images.length === 0) return; // Keep placeholder
+
+  container.innerHTML = `<img src="${images[0]}" alt="" loading="lazy">`;
   
-  const filtered = currentCategory === 'all' 
-    ? fleet 
-    : fleet.filter(car => car.category === currentCategory);
-  
-  container.innerHTML = '';
-  
-  for (const car of filtered) {
-    const images = await discoverImages(car.slug);
-    const card = createCarCard(car, images);
-    container.appendChild(card);
+  if (images.length > 1) {
+    const thumbs = document.createElement('div');
+    thumbs.className = 'car-thumbs';
+    thumbs.innerHTML = images.map((img, i) => `
+      <img src="${img}" class="car-thumb ${i === 0 ? 'active' : ''}" data-src="${img}">
+    `).join('');
+    container.after(thumbs);
+
+    thumbs.querySelectorAll('.car-thumb').forEach(thumb => {
+      thumb.addEventListener('click', (e) => {
+        e.stopPropagation();
+        container.querySelector('img').src = thumb.dataset.src;
+        thumbs.querySelectorAll('.car-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+    });
   }
 }
 
-function createCarCard(car, images) {
-  const div = document.createElement('div');
-  div.className = 'car-card';
-  div.setAttribute('role', 'article');
-  div.setAttribute('aria-label', car.name);
-  
-  const categoryLabel = categories[car.category]?.[currentLang] || car.category;
-  
-  let imageHTML = '';
-  if (images.length > 0) {
-    imageHTML = `
-      <div class="car-image">
-        <img src="${images[0]}" alt="${car.name}" loading="lazy" />
-      </div>
-      ${images.length > 1 ? `
-        <div class="car-thumbnails">
-          ${images.map((img, i) => `
-            <img src="${img}" alt="" class="car-thumb ${i === 0 ? 'active' : ''}" 
-                 onclick="switchCarImage(this, '${img}')" />
-          `).join('')}
-        </div>
-      ` : ''}
-    `;
-  } else {
-    imageHTML = `
-      <div class="car-image">
-        <div class="car-image-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-2.9-5.2A2 2 0 0013.4 4H10a2 2 0 00-1.7.8L5.5 10H3c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h2"/>
-            <circle cx="7" cy="17" r="2"/>
-            <circle cx="17" cy="17" r="2"/>
-          </svg>
-        </div>
-      </div>
-    `;
-  }
-  
-  div.innerHTML = `
-    ${imageHTML}
-    <div class="car-info">
-      <div class="car-name">${car.name}</div>
-      <div class="car-category">${categoryLabel}</div>
-      ${car.popular ? `<span class="car-badge">${t('fleet.popular')}</span>` : ''}
-      <div class="car-specs">
-        <span class="car-spec">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-          ${car.passengers} ${t('fleet.passengers')}
-        </span>
-        <span class="car-spec">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-          ${car.doors} ${t('fleet.doors')}
-        </span>
-        ${car.ac ? `
-          <span class="car-spec">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 3v18M5.3 7.5l13.4 9M5.3 16.5l13.4-9"/>
-            </svg>
-            ${t('fleet.ac')}
-          </span>
-        ` : ''}
-      </div>
-    </div>
-  `;
-  
-  return div;
-}
+/* ===== Vehicle Selection ===== */
+function selectVehicle(slug) {
+  const car = fleet.find(c => c.slug === slug);
+  if (!car) return;
 
-function switchCarImage(thumb, src) {
-  const card = thumb.closest('.car-card');
-  const mainImg = card.querySelector('.car-image img');
-  if (mainImg) {
-    mainImg.src = src;
-    card.querySelectorAll('.car-thumb').forEach(t => t.classList.remove('active'));
-    thumb.classList.add('active');
-  }
-}
-
-/* ===== Vehicle Select ===== */
-function populateVehicleSelect() {
-  const select = document.getElementById('vehicleSelect');
-  if (!select) return;
+  selectedVehicle = car;
   
-  select.innerHTML = `<option value="">${t('form.vehicle.any')}</option>`;
-  fleet.forEach(car => {
-    const opt = document.createElement('option');
-    opt.value = car.name;
-    opt.textContent = car.name;
-    select.appendChild(opt);
+  // Update UI
+  document.querySelectorAll('.car-card').forEach(c => {
+    c.classList.toggle('selected', c.dataset.slug === slug);
   });
+
+  // Update form hidden fields
+  document.getElementById('selectedVehicleName').value = car.name;
+  document.getElementById('selectedCategory').value = car.category;
+
+  // Update stepper display
+  updateSelectedVehicleUI();
+
+  // Go to stepper and step 2
+  goToStep(2);
+  document.getElementById('reserve').scrollIntoView({ behavior: 'smooth' });
+}
+
+function updateSelectedVehicleUI() {
+  const container = document.getElementById('selectedVehicle');
+  if (!container) return;
+
+  if (!selectedVehicle) {
+    container.classList.remove('has-vehicle');
+    container.innerHTML = `
+      <p class="no-vehicle" data-i18n="step1.noVehicle">${t('step1.noVehicle')}</p>
+      <a href="#fleet" class="btn btn-secondary" data-i18n="step1.browse">${t('step1.browse')}</a>
+    `;
+    return;
+  }
+
+  const catLabel = categories[selectedVehicle.category]?.[lang] || selectedVehicle.category;
+  const images = imageCache[selectedVehicle.slug] || [];
+  const thumbSrc = images[0] || '';
+
+  container.classList.add('has-vehicle');
+  container.innerHTML = `
+    ${thumbSrc ? `<img class="vehicle-thumb" src="${thumbSrc}" alt="">` : `<div class="vehicle-thumb"></div>`}
+    <div class="vehicle-info">
+      <div class="vehicle-name">${selectedVehicle.name}</div>
+      <div class="vehicle-cat">${catLabel}</div>
+    </div>
+    <span class="change-btn" onclick="document.getElementById('fleet').scrollIntoView({behavior:'smooth'})">Change</span>
+  `;
+}
+
+/* ===== Stepper ===== */
+function initStepper() {
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const form = document.getElementById('reservationForm');
+
+  prevBtn?.addEventListener('click', () => goToStep(currentStep - 1));
+  nextBtn?.addEventListener('click', () => {
+    if (validateCurrentStep()) {
+      goToStep(currentStep + 1);
+    }
+  });
+
+  form?.addEventListener('submit', handleSubmit);
+
+  // Set initial preferred language based on current lang
+  const langSelect = document.getElementById('language');
+  if (langSelect) langSelect.value = lang;
+}
+
+function goToStep(step) {
+  if (step < 1 || step > 4) return;
+  currentStep = step;
+
+  // Update panels
+  document.querySelectorAll('.step-panel').forEach(p => {
+    p.classList.toggle('active', parseInt(p.dataset.step) === step);
+  });
+
+  // Update indicators
+  document.querySelectorAll('.step-indicator').forEach(ind => {
+    const s = parseInt(ind.dataset.step);
+    ind.classList.remove('active', 'completed');
+    if (s === step) ind.classList.add('active');
+    else if (s < step) ind.classList.add('completed');
+  });
+
+  // Update buttons
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const submitBtn = document.getElementById('submitBtn');
+
+  prevBtn.disabled = step === 1;
+  nextBtn.hidden = step === 4;
+  submitBtn.hidden = step !== 4;
+
+  // Update review on final step
+  if (step === 4) updateReviewSummary();
+}
+
+function validateCurrentStep() {
+  const panel = document.querySelector(`.step-panel[data-step="${currentStep}"]`);
+  if (!panel) return true;
+
+  let valid = true;
+  const fields = panel.querySelectorAll('[required]');
+
+  fields.forEach(field => {
+    const error = field.parentElement.querySelector('.field-error');
+    field.classList.remove('error');
+    if (error) error.textContent = '';
+
+    if (!field.value.trim()) {
+      valid = false;
+      field.classList.add('error');
+      if (error) error.textContent = t('form.required');
+    } else if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) {
+      valid = false;
+      field.classList.add('error');
+      if (error) error.textContent = t('form.invalidEmail');
+    }
+  });
+
+  // Date validation on step 2
+  if (currentStep === 2) {
+    const pickup = document.getElementById('pickupDate');
+    const ret = document.getElementById('returnDate');
+    if (pickup.value && ret.value && ret.value <= pickup.value) {
+      valid = false;
+      ret.classList.add('error');
+      const error = ret.parentElement.querySelector('.field-error');
+      if (error) error.textContent = t('form.invalidDate');
+    }
+  }
+
+  return valid;
+}
+
+function updateReviewSummary() {
+  const container = document.getElementById('reviewSummary');
+  if (!container) return;
+
+  const form = document.getElementById('reservationForm');
+  const pickup = form.pickupDate.value;
+  const ret = form.returnDate.value;
+  const pickupLoc = form.pickupLocation.value;
+  const dropoffLoc = form.dropoffLocation.value;
+
+  container.innerHTML = `
+    <h4 data-i18n="review.title">${t('review.title')}</h4>
+    <div class="review-row"><span>${t('review.vehicle')}</span><span>${selectedVehicle?.name || '-'}</span></div>
+    <div class="review-row"><span>${t('review.dates')}</span><span>${pickup || '-'} → ${ret || '-'}</span></div>
+    <div class="review-row"><span>${t('review.pickup')}</span><span>${pickupLoc || '-'}</span></div>
+    <div class="review-row"><span>${t('review.dropoff')}</span><span>${dropoffLoc || '-'}</span></div>
+  `;
 }
 
 /* ===== Date Pickers ===== */
 function initDatePickers() {
-  const pickupInput = document.getElementById('pickupDate');
-  const returnInput = document.getElementById('returnDate');
-  
-  if (!pickupInput || !returnInput) return;
-  
-  // Set min date to today
+  const pickup = document.getElementById('pickupDate');
+  const ret = document.getElementById('returnDate');
+  if (!pickup || !ret) return;
+
   const today = new Date().toISOString().split('T')[0];
-  pickupInput.min = today;
-  returnInput.min = today;
-  
-  // Update return min when pickup changes
-  pickupInput.addEventListener('change', () => {
-    if (pickupInput.value) {
-      const pickupDate = new Date(pickupInput.value);
-      pickupDate.setDate(pickupDate.getDate() + 1);
-      returnInput.min = pickupDate.toISOString().split('T')[0];
-      
-      // If return is before new min, clear it
-      if (returnInput.value && returnInput.value < returnInput.min) {
-        returnInput.value = '';
-      }
+  pickup.min = today;
+  ret.min = today;
+
+  pickup.addEventListener('change', () => {
+    if (pickup.value) {
+      const next = new Date(pickup.value);
+      next.setDate(next.getDate() + 1);
+      ret.min = next.toISOString().split('T')[0];
+      if (ret.value && ret.value < ret.min) ret.value = '';
     }
   });
 }
 
-/* ===== Form Validation ===== */
-function initForm() {
-  const form = document.getElementById('reservationForm');
-  if (!form) return;
-  
-  // Inline validation
-  const requiredFields = form.querySelectorAll('[required]');
-  requiredFields.forEach(field => {
-    field.addEventListener('blur', () => validateField(field));
-    field.addEventListener('input', () => {
-      if (field.classList.contains('error')) {
-        validateField(field);
-      }
-    });
-  });
-  
-  // Form submit
-  form.addEventListener('submit', handleSubmit);
-}
-
-function validateField(field) {
-  const errorEl = field.parentElement.querySelector('.field-error');
-  let error = '';
-  
-  if (field.required && !field.value.trim()) {
-    error = t('form.required');
-  } else if (field.type === 'email' && field.value) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(field.value)) {
-      error = t('form.invalidEmail');
-    }
-  }
-  
-  // Date validation
-  if (field.id === 'returnDate' && field.value) {
-    const pickupInput = document.getElementById('pickupDate');
-    if (pickupInput && pickupInput.value && field.value <= pickupInput.value) {
-      error = t('form.invalidDate');
-    }
-  }
-  
-  field.classList.toggle('error', !!error);
-  if (errorEl) errorEl.textContent = error;
-  
-  return !error;
-}
-
+/* ===== Form Submit ===== */
 async function handleSubmit(e) {
   e.preventDefault();
-  
+  if (!validateCurrentStep()) return;
+
   const form = e.target;
-  const submitBtn = form.querySelector('button[type="submit"]');
-  const errorBox = document.getElementById('formErrors');
-  const toast = document.getElementById('formToast');
+  const submitBtn = document.getElementById('submitBtn');
   
-  // Validate all fields
-  let isValid = true;
-  const errors = [];
-  
-  form.querySelectorAll('[required]').forEach(field => {
-    if (!validateField(field)) {
-      isValid = false;
-      const label = field.parentElement.querySelector('label');
-      if (label) errors.push(label.textContent);
-    }
-  });
-  
-  if (!isValid) {
-    if (errorBox) {
-      errorBox.innerHTML = `
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="12"/>
-          <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
-        <div>
-          <strong>Please fix the following:</strong>
-          <ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>
-        </div>
-      `;
-      errorBox.style.display = 'flex';
-      errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    return;
-  }
-  
-  if (errorBox) errorBox.style.display = 'none';
-  
-  // Collect form data
+  submitBtn.disabled = true;
+  submitBtn.textContent = t('stepper.submitting');
+
   const data = {
+    selectedVehicleName: form.selectedVehicleName.value,
+    category: form.category.value || (selectedVehicle?.category || ''),
     pickupDate: form.pickupDate.value,
     returnDate: form.returnDate.value,
     pickupLocation: form.pickupLocation.value,
-    returnLocation: form.returnLocation.value,
-    vehicle: form.vehicle.value || 'Any Available',
+    dropoffLocation: form.dropoffLocation.value,
+    transmission: form.transmission.value,
+    passengers: form.passengers.value,
+    luggage: form.luggage.value,
     name: form.name.value,
     email: form.email.value,
     phone: form.phone.value,
-    notes: form.notes?.value || ''
+    language: form.language.value,
+    notes: form.notes.value,
+    createdAt: new Date().toISOString()
   };
-  
-  // Submit
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = `
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
-      <circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="12"/>
-    </svg>
-    ${t('form.submitting')}
-  `;
-  
+
   try {
     const res = await fetch('/api/reservation', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
-    
-    if (!res.ok) throw new Error('Submission failed');
-    
+
+    if (!res.ok) throw new Error('Failed');
+
     // Show success modal
-    const modal = document.getElementById('successModal');
-    if (modal) {
-      modal.hidden = false;
-      modal.focus();
-    }
-    
+    document.getElementById('successModal').hidden = false;
     form.reset();
-    
+    selectedVehicle = null;
+    currentStep = 1;
+    goToStep(1);
+    updateSelectedVehicleUI();
+
   } catch (err) {
-    console.error('Submission error:', err);
-    if (toast) {
-      toast.className = 'toast error show';
-      toast.textContent = 'There was an error submitting your request. Please try again or contact us directly.';
-    }
+    console.error('Submit error:', err);
+    alert('There was an error. Please try again or contact us via WhatsApp.');
   } finally {
     submitBtn.disabled = false;
-    submitBtn.innerHTML = `
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="22" y1="2" x2="11" y2="13"/>
-        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-      </svg>
-      ${t('form.submit')}
-    `;
+    submitBtn.textContent = t('stepper.submit');
   }
 }
 
-function closeSuccessModal() {
-  const modal = document.getElementById('successModal');
-  if (modal) modal.hidden = true;
-}
+// Close modal
+document.getElementById('closeModal')?.addEventListener('click', () => {
+  document.getElementById('successModal').hidden = true;
+});
 
-// Close modal on escape or backdrop click
+document.getElementById('successModal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'successModal') {
+    document.getElementById('successModal').hidden = true;
+  }
+});
+
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeSuccessModal();
+  if (e.key === 'Escape') {
+    document.getElementById('successModal').hidden = true;
+  }
 });
-
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'successModal') closeSuccessModal();
-});
-
-/* ===== Spinner Animation ===== */
-const style = document.createElement('style');
-style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
-document.head.appendChild(style);
-
-/* ===== Expose Functions ===== */
-window.toggleTheme = toggleTheme;
-window.toggleLanguage = toggleLanguage;
-window.filterCategory = filterCategory;
-window.switchCarImage = switchCarImage;
-window.closeSuccessModal = closeSuccessModal;

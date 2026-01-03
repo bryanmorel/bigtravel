@@ -20,12 +20,6 @@ function sanitize(value, maxLen = 500) {
   return s.length > maxLen ? s.slice(0, maxLen) : s;
 }
 
-function asInt(value, fallback) {
-  const n = Number(value);
-  if (!Number.isFinite(n)) return fallback;
-  return Math.round(n);
-}
-
 function parseBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
   if (typeof req.body === 'string') {
@@ -88,6 +82,7 @@ function formatEmailHtml(data) {
       <tr><td style="padding: 8px; border: 1px solid #ddd; background: #f9f9f9;"><strong>Pickup Location</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${data.pickupLocation}</td></tr>
       <tr><td style="padding: 8px; border: 1px solid #ddd; background: #f9f9f9;"><strong>Dropoff Location</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${data.dropoffLocation}</td></tr>
       <tr><td colspan="2" style="padding: 8px; border: 1px solid #ddd; background: #e9e9e9;"><strong>Vehicle Preferences</strong></td></tr>
+      <tr><td style="padding: 8px; border: 1px solid #ddd; background: #f9f9f9;"><strong>Selected Vehicle</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${data.selectedVehicleName || '-'}</td></tr>
       <tr><td style="padding: 8px; border: 1px solid #ddd; background: #f9f9f9;"><strong>Category</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${data.category}</td></tr>
       <tr><td style="padding: 8px; border: 1px solid #ddd; background: #f9f9f9;"><strong>Transmission</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${data.transmission}</td></tr>
       <tr><td style="padding: 8px; border: 1px solid #ddd; background: #f9f9f9;"><strong>Passengers</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${data.passengers}</td></tr>
@@ -112,6 +107,7 @@ function formatEmailText(data) {
     `Pickup location: ${data.pickupLocation}`,
     `Dropoff location: ${data.dropoffLocation}`,
     '',
+    `Selected Vehicle: ${data.selectedVehicleName || '-'}`,
     `Category: ${data.category}`,
     `Transmission: ${data.transmission}`,
     `Passengers: ${data.passengers}`,
@@ -197,10 +193,11 @@ module.exports = async function (context, req) {
       pickupLocation: sanitize(body.pickupLocation, 180),
       dropoffLocation: sanitize(body.dropoffLocation, 180),
 
+      selectedVehicleName: sanitize(body.selectedVehicleName, 100),
       category: sanitize(body.category, 40),
       transmission: sanitize(body.transmission, 20),
-      passengers: asInt(body.passengers, 0),
-      luggage: asInt(body.luggage, 0),
+      passengers: sanitize(body.passengers, 20),
+      luggage: sanitize(body.luggage, 30),
       notes: sanitize(body.notes, 1200),
 
       createdAt: sanitize(body.createdAt, 40),
@@ -213,11 +210,7 @@ module.exports = async function (context, req) {
       requireString(data.pickupDate) &&
       requireString(data.returnDate) &&
       requireString(data.pickupLocation) &&
-      requireString(data.dropoffLocation) &&
-      requireString(data.category) &&
-      requireString(data.transmission) &&
-      data.passengers > 0 &&
-      data.luggage >= 0;
+      requireString(data.dropoffLocation);
 
     if (!requiredOk) return json(context.res, 400, { error: 'Missing required fields' });
 

@@ -1,4 +1,5 @@
 const { ConfidentialClientApplication } = require('@azure/msal-node');
+const fetch = require('node-fetch');
 
 function json(res, status, body) {
   res.status = status;
@@ -221,7 +222,7 @@ module.exports = async function (context, req) {
 
     return json(context.res, 200, { ok: true });
   } catch (err) {
-    context.log.error('Reservation handler failed', err);
+    context.log.error('Reservation handler failed:', err.message, err.stack);
     return json(context.res, 500, { error: 'Internal server error' });
   }
 };

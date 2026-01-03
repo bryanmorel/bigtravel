@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Big Travel car rental — request a reservation for your trip." />
+    <meta name="description" content="Big Travel car rental — request a reservation for your trip. Premium vehicles, easy booking." />
     <title>Big Travel | Car Rental</title>
 
     <link rel="icon" type="image/png" href="assets/logo.png" />
 
     <script>
-      // Prevent theme flash
       (() => {
         const stored = localStorage.getItem('bt_theme');
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -38,53 +37,109 @@
         </nav>
 
         <div class="header-actions">
-          <button class="btn btn-ghost" id="langToggle" type="button" aria-label="Change language">
-            <span class="btn-icon" aria-hidden="true">🌐</span>
+          <button class="btn btn-icon-only" id="langToggle" type="button" aria-label="Change language">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
             <span id="langLabel">ES</span>
           </button>
 
-          <button class="btn btn-ghost" id="themeToggle" type="button" aria-label="Toggle theme">
-            <span class="btn-icon" aria-hidden="true">◐</span>
+          <button class="btn btn-icon-only" id="themeToggle" type="button" aria-label="Toggle theme">
+            <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
           </button>
 
-          <a class="btn btn-primary" href="#request" data-i18n="cta.request">Request reservation</a>
+          <a class="btn btn-primary desktop-only" href="#request" data-i18n="cta.request">Request reservation</a>
         </div>
       </div>
     </header>
+
+    <!-- Mobile sticky CTA -->
+    <div class="mobile-cta">
+      <a class="btn btn-primary btn-full" href="#request" data-i18n="cta.request">Request reservation</a>
+    </div>
 
     <main id="main">
       <section class="hero" id="top">
         <div class="container hero-inner">
           <div class="hero-copy">
-            <p class="badge" data-i18n="hero.badge">Simple, fast reservation requests</p>
-            <h1 class="hero-title" data-i18n="hero.title">Car rental for your next trip</h1>
+            <p class="badge">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              <span data-i18n="hero.badge">Simple, fast reservation requests</span>
+            </p>
+            <h1 class="hero-title" data-i18n="hero.title">Premium car rental for your next adventure</h1>
             <p class="hero-subtitle" data-i18n="hero.subtitle">
-              Choose the car size and features you need, share your dates, and we’ll confirm availability and pricing.
+              Choose the car size and features you need, share your dates, and we'll confirm availability and pricing within hours.
             </p>
 
             <div class="hero-cta">
-              <a class="btn btn-primary" href="#request" data-i18n="cta.request">Request reservation</a>
-              <a class="btn btn-secondary" href="#fleet" data-i18n="cta.viewFleet">View fleet</a>
+              <a class="btn btn-primary btn-lg" href="#request">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span data-i18n="cta.request">Request reservation</span>
+              </a>
+              <a class="btn btn-secondary btn-lg" href="#fleet">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="7" cy="17" r="2"/>
+                  <circle cx="17" cy="17" r="2"/>
+                  <path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0H9"/>
+                </svg>
+                <span data-i18n="cta.viewFleet">View fleet</span>
+              </a>
             </div>
-
-            <p class="disclaimer" data-i18n="hero.disclaimer">
-              Vehicles shown are examples. Exact model depends on availability.
-            </p>
           </div>
 
-          <div class="hero-card" role="region" aria-label="Quick highlights">
-            <ul class="stats">
-              <li class="stat">
-                <span class="stat-k" data-i18n="stats.support">Fast response</span>
-                <span class="stat-v" data-i18n="stats.supportDesc">We reply within business hours</span>
+          <div class="hero-card">
+            <ul class="trust-list">
+              <li class="trust-item">
+                <div class="trust-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </div>
+                <div class="trust-text">
+                  <strong data-i18n="stats.support">Fast response</strong>
+                  <span data-i18n="stats.supportDesc">Reply within 2-4 hours</span>
+                </div>
               </li>
-              <li class="stat">
-                <span class="stat-k" data-i18n="stats.fleet">Mixed fleet</span>
-                <span class="stat-v" data-i18n="stats.fleetDesc">City cars to SUVs / 4x4</span>
+              <li class="trust-item">
+                <div class="trust-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="7" cy="17" r="2"/>
+                    <circle cx="17" cy="17" r="2"/>
+                    <path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0H9"/>
+                  </svg>
+                </div>
+                <div class="trust-text">
+                  <strong data-i18n="stats.fleet">18+ vehicles</strong>
+                  <span data-i18n="stats.fleetDesc">City cars to SUVs & 4x4</span>
+                </div>
               </li>
-              <li class="stat">
-                <span class="stat-k" data-i18n="stats.mobile">Mobile-first</span>
-                <span class="stat-v" data-i18n="stats.mobileDesc">Easy booking from your phone</span>
+              <li class="trust-item">
+                <div class="trust-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <polyline points="9 12 11 14 15 10"/>
+                  </svg>
+                </div>
+                <div class="trust-text">
+                  <strong data-i18n="stats.insurance">Full coverage</strong>
+                  <span data-i18n="stats.insuranceDesc">Insurance included</span>
+                </div>
               </li>
             </ul>
           </div>
@@ -93,42 +148,53 @@
 
       <section class="section" id="fleet">
         <div class="container">
-          <div class="section-head">
-            <h2 data-i18n="fleet.title">Fleet & examples</h2>
-            <p data-i18n="fleet.subtitle">
-              Pick a category (size & features). We’ll match you with the closest available vehicle from our fleet.
-            </p>
+          <div class="section-header">
+            <h2 data-i18n="fleet.title">Our Fleet</h2>
+            <p data-i18n="fleet.subtitle">Browse our categories and vehicles. Select what fits your needs.</p>
           </div>
 
-          <div class="category-grid" id="categoryGrid" aria-label="Vehicle categories"></div>
+          <div class="category-tabs" id="categoryTabs" role="tablist"></div>
+          <div class="fleet-grid" id="fleetGrid"></div>
 
           <div class="fleet-note">
-            <details class="details">
-              <summary data-i18n="fleet.seeModels">See our current fleet models</summary>
-              <div class="models" id="modelList"></div>
-            </details>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <p data-i18n="fleet.disclaimer">Vehicles shown are examples. Exact model depends on availability. We'll confirm your specific vehicle when you book.</p>
           </div>
         </div>
       </section>
 
-      <section class="section alt" id="how">
+      <section class="section section-alt" id="how">
         <div class="container">
-          <div class="section-head">
+          <div class="section-header">
             <h2 data-i18n="how.title">How it works</h2>
+            <p data-i18n="how.subtitle">Three simple steps to get on the road</p>
           </div>
 
           <ol class="steps">
             <li class="step">
-              <h3 data-i18n="how.step1Title">1) Tell us your needs</h3>
-              <p data-i18n="how.step1Desc">Dates, pickup/dropoff, category, passengers, and transmission.</p>
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <h3 data-i18n="how.step1Title">Tell us your needs</h3>
+                <p data-i18n="how.step1Desc">Share your dates, locations, and vehicle preferences using our simple form.</p>
+              </div>
             </li>
             <li class="step">
-              <h3 data-i18n="how.step2Title">2) We confirm options</h3>
-              <p data-i18n="how.step2Desc">We’ll reply with availability and price for the closest match in our fleet.</p>
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <h3 data-i18n="how.step2Title">We confirm options</h3>
+                <p data-i18n="how.step2Desc">We'll reply within hours with availability, exact pricing, and vehicle details.</p>
+              </div>
             </li>
             <li class="step">
-              <h3 data-i18n="how.step3Title">3) Finalize reservation</h3>
-              <p data-i18n="how.step3Desc">We’ll collect the remaining details to complete the booking.</p>
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <h3 data-i18n="how.step3Title">Finalize & drive</h3>
+                <p data-i18n="how.step3Desc">Complete your booking and pick up your vehicle at the agreed location.</p>
+              </div>
             </li>
           </ol>
         </div>
@@ -136,131 +202,244 @@
 
       <section class="section" id="request">
         <div class="container">
-          <div class="section-head">
-            <h2 data-i18n="request.title">Request a reservation</h2>
-            <p data-i18n="request.subtitle">Fill out the form and we’ll get back to you.</p>
+          <div class="section-header">
+            <h2 data-i18n="request.title">Request a Reservation</h2>
+            <p data-i18n="request.subtitle">Fill out the form below and we'll get back to you with availability and pricing.</p>
           </div>
 
-          <div class="form-layout">
-            <form class="card form" id="reservationForm" novalidate>
-              <div class="grid">
-                <label class="field">
-                  <span class="label" data-i18n="form.name">Full name</span>
-                  <input name="name" type="text" autocomplete="name" required />
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.email">Email</span>
-                  <input name="email" type="email" autocomplete="email" required />
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.phone">Phone / WhatsApp</span>
-                  <input name="phone" type="tel" autocomplete="tel" required />
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.language">Preferred language</span>
-                  <select name="language" required>
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                  </select>
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.pickupDate">Pickup date</span>
-                  <input name="pickupDate" type="date" required />
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.returnDate">Return date</span>
-                  <input name="returnDate" type="date" required />
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.pickupLocation">Pickup location</span>
-                  <input name="pickupLocation" type="text" required />
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.dropoffLocation">Dropoff location</span>
-                  <input name="dropoffLocation" type="text" required />
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.category">Vehicle category</span>
-                  <select name="category" id="categorySelect" required></select>
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.transmission">Transmission</span>
-                  <select name="transmission" required>
-                    <option value="either" data-i18n="form.transEither">Either</option>
-                    <option value="automatic" data-i18n="form.transAuto">Automatic</option>
-                    <option value="manual" data-i18n="form.transManual">Manual</option>
-                  </select>
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.passengers">Passengers</span>
-                  <input name="passengers" type="number" min="1" max="10" value="2" required />
-                </label>
-
-                <label class="field">
-                  <span class="label" data-i18n="form.luggage">Luggage</span>
-                  <input name="luggage" type="number" min="0" max="10" value="1" required />
-                </label>
-
-                <label class="field field-full">
-                  <span class="label" data-i18n="form.notes">Notes (optional)</span>
-                  <textarea name="notes" rows="4" placeholder=""></textarea>
-                </label>
+          <div class="form-wrap">
+            <form class="form-card" id="reservationForm" novalidate>
+              <div class="form-errors" id="formErrors" hidden>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="15" y1="9" x2="9" y2="15"/>
+                  <line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+                <div>
+                  <strong data-i18n="form.errorsTitle">Please fix the errors below</strong>
+                  <ul id="errorList"></ul>
+                </div>
               </div>
 
-              <div class="form-actions">
-                <button class="btn btn-primary" type="submit" id="submitBtn" data-i18n="form.submit">Send request</button>
-                <p class="form-hint" data-i18n="form.hint">
-                  We’ll contact you to confirm availability and finalize.
+              <fieldset class="form-section">
+                <legend>
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  <span data-i18n="form.sectionTrip">Trip Details</span>
+                </legend>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="pickupDate" data-i18n="form.pickupDate">Pickup date</label>
+                    <input type="date" id="pickupDate" name="pickupDate" required />
+                    <span class="field-error" data-error="pickupDate"></span>
+                  </div>
+                  <div class="field">
+                    <label for="returnDate" data-i18n="form.returnDate">Return date</label>
+                    <input type="date" id="returnDate" name="returnDate" required />
+                    <span class="field-error" data-error="returnDate"></span>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="pickupLocation" data-i18n="form.pickupLocation">Pickup location</label>
+                    <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Airport, hotel..." required />
+                    <span class="field-error" data-error="pickupLocation"></span>
+                  </div>
+                  <div class="field">
+                    <label for="dropoffLocation" data-i18n="form.dropoffLocation">Dropoff location</label>
+                    <input type="text" id="dropoffLocation" name="dropoffLocation" placeholder="Airport, hotel..." required />
+                    <span class="field-error" data-error="dropoffLocation"></span>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-section">
+                <legend>
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="7" cy="17" r="2"/>
+                    <circle cx="17" cy="17" r="2"/>
+                    <path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0H9"/>
+                  </svg>
+                  <span data-i18n="form.sectionVehicle">Vehicle Preferences</span>
+                </legend>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="category" data-i18n="form.category">Vehicle category</label>
+                    <select id="category" name="category" required></select>
+                    <span class="field-error" data-error="category"></span>
+                  </div>
+                  <div class="field">
+                    <label for="transmission" data-i18n="form.transmission">Transmission</label>
+                    <select id="transmission" name="transmission" required>
+                      <option value="either" data-i18n="form.transEither">No preference</option>
+                      <option value="automatic" data-i18n="form.transAuto">Automatic</option>
+                      <option value="manual" data-i18n="form.transManual">Manual</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field field-sm">
+                    <label for="passengers" data-i18n="form.passengers">Passengers</label>
+                    <input type="number" id="passengers" name="passengers" min="1" max="10" value="2" required />
+                  </div>
+                  <div class="field field-sm">
+                    <label for="luggage" data-i18n="form.luggage">Luggage</label>
+                    <input type="number" id="luggage" name="luggage" min="0" max="10" value="1" required />
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-section">
+                <legend>
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  <span data-i18n="form.sectionContact">Contact Information</span>
+                </legend>
+                <div class="form-row">
+                  <div class="field field-full">
+                    <label for="name" data-i18n="form.name">Full name</label>
+                    <input type="text" id="name" name="name" autocomplete="name" required />
+                    <span class="field-error" data-error="name"></span>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="email" data-i18n="form.email">Email</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required />
+                    <span class="field-error" data-error="email"></span>
+                  </div>
+                  <div class="field">
+                    <label for="phone" data-i18n="form.phone">Phone / WhatsApp</label>
+                    <input type="tel" id="phone" name="phone" autocomplete="tel" required />
+                    <span class="field-error" data-error="phone"></span>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="language" data-i18n="form.language">Preferred language</label>
+                    <select id="language" name="language">
+                      <option value="en">English</option>
+                      <option value="es">Español</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field field-full">
+                    <label for="notes" data-i18n="form.notes">Notes (optional)</label>
+                    <textarea id="notes" name="notes" rows="3"></textarea>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="form-footer">
+                <button type="submit" class="btn btn-primary btn-lg btn-full" id="submitBtn">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                  <span data-i18n="form.submit">Send request</span>
+                </button>
+                <p class="form-hint">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                  </svg>
+                  <span data-i18n="form.hint">This is a request, not a confirmed booking. We'll contact you to confirm.</span>
                 </p>
               </div>
 
               <div class="toast" id="formToast" role="status" aria-live="polite"></div>
             </form>
 
-            <aside class="card side">
-              <h3 data-i18n="side.title">What we need</h3>
-              <ul class="side-list">
-                <li data-i18n="side.item1">Dates and locations</li>
-                <li data-i18n="side.item2">Category and transmission</li>
-                <li data-i18n="side.item3">Passengers and luggage</li>
-              </ul>
-
-              <p class="disclaimer" data-i18n="side.disclaimer">
-                Your request is not a confirmed booking until we reply.
-              </p>
+            <aside class="sidebar-card">
+              <div class="sidebar-block">
+                <h3>
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 11 12 14 22 4"/>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                  </svg>
+                  <span data-i18n="side.title">What we need</span>
+                </h3>
+                <ul class="check-list">
+                  <li data-i18n="side.item1">Your travel dates</li>
+                  <li data-i18n="side.item2">Pickup & dropoff locations</li>
+                  <li data-i18n="side.item3">Vehicle preferences</li>
+                  <li data-i18n="side.item4">Contact information</li>
+                </ul>
+              </div>
+              <div class="sidebar-block">
+                <h3>
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  <span data-i18n="side.nextTitle">What happens next</span>
+                </h3>
+                <ol class="num-list">
+                  <li data-i18n="side.next1">We review your request</li>
+                  <li data-i18n="side.next2">We send pricing & availability</li>
+                  <li data-i18n="side.next3">You confirm to complete booking</li>
+                </ol>
+              </div>
+              <div class="sidebar-note">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <p data-i18n="side.disclaimer">Your request is not a confirmed booking until we reply with confirmation.</p>
+              </div>
             </aside>
           </div>
         </div>
       </section>
 
-      <footer class="footer">
-        <div class="container footer-inner">
-          <div class="footer-left">
-            <img class="footer-logo" src="assets/logo.png" alt="Big Travel" />
-            <div>
-              <div class="footer-brand">Big Travel</div>
-              <div class="footer-meta" data-i18n="footer.meta">Car rental reservation requests</div>
-            </div>
+      <div class="success-modal" id="successModal" hidden>
+        <div class="success-content">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
           </div>
-
-          <div class="footer-right">
-            <a class="footer-link" href="#request" data-i18n="footer.request">Request</a>
-            <a class="footer-link" href="#fleet" data-i18n="footer.fleet">Fleet</a>
+          <h2 data-i18n="success.title">Request Sent!</h2>
+          <p data-i18n="success.message">Thank you! We'll review your request and get back to you within 2-4 hours.</p>
+          <div class="success-steps">
+            <h3 data-i18n="success.nextTitle">What happens next:</h3>
+            <ol>
+              <li data-i18n="success.next1">Check your email for our response</li>
+              <li data-i18n="success.next2">Review pricing and vehicle details</li>
+              <li data-i18n="success.next3">Confirm to complete your booking</li>
+            </ol>
           </div>
+          <button type="button" class="btn btn-primary" id="successClose" data-i18n="success.close">Make another request</button>
         </div>
-      </footer>
+      </div>
     </main>
 
-    <script src="main.js" type="module"></script>
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="Big Travel" class="footer-logo" />
+          <div>
+            <strong>Big Travel</strong>
+            <span data-i18n="footer.tagline">Premium car rental</span>
+          </div>
+        </div>
+        <nav class="footer-links">
+          <a href="#fleet" data-i18n="nav.fleet">Fleet</a>
+          <a href="#how" data-i18n="nav.how">How it works</a>
+          <a href="#request" data-i18n="nav.request">Request</a>
+        </nav>
+        <p class="footer-copy">&copy; 2026 Big Travel. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
   </body>
 </html>

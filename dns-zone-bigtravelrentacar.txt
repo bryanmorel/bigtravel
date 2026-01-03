@@ -1,0 +1,20 @@
+; DNS Zone File for bigtravelrentacar.co
+; Import this into Bluehost Advanced DNS
+; Format: BIND / RFC 1035
+
+$ORIGIN bigtravelrentacar.co.
+$TTL 3600
+
+; TXT record for Azure Static Web Apps domain validation
+@    IN    TXT    "_0awjwehsu671l3ftg1hjqgca0rw4vbk"
+
+; CNAME for www subdomain pointing to Azure Static Web App
+www    IN    CNAME    brave-field-02a757b0f.6.azurestaticapps.net.
+
+; For the root domain (@), you have two options:
+; 
+; OPTION 1: If Bluehost supports ALIAS/ANAME records (preferred)
+; @    IN    ALIAS    brave-field-02a757b0f.6.azurestaticapps.net.
+;
+; OPTION 2: If not, use a redirect from @ to www
+; Then set up a URL redirect in Bluehost: bigtravelrentacar.co -> www.bigtravelrentacar.co

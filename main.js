@@ -1,27 +1,35 @@
 /* ===== Fleet Data ===== */
 const fleet = [
-  { slug: 'corolla', name: 'Toyota Corolla', category: 'sedan', passengers: 5, doors: 4, ac: true, popular: true },
-  { slug: 'camry', name: 'Toyota Camry', category: 'sedan', passengers: 5, doors: 4, ac: true },
-  { slug: 'elantra', name: 'Hyundai Elantra', category: 'sedan', passengers: 5, doors: 4, ac: true },
-  { slug: 'rav4', name: 'Toyota RAV4', category: 'suv', passengers: 5, doors: 4, ac: true, popular: true },
-  { slug: 'crv', name: 'Honda CR-V', category: 'suv', passengers: 5, doors: 4, ac: true },
-  { slug: 'tucson', name: 'Hyundai Tucson', category: 'suv', passengers: 5, doors: 4, ac: true },
-  { slug: 'highlander', name: 'Toyota Highlander', category: 'suv', passengers: 7, doors: 4, ac: true },
-  { slug: 'sienna', name: 'Toyota Sienna', category: 'minivan', passengers: 8, doors: 4, ac: true, popular: true },
-  { slug: 'odyssey', name: 'Honda Odyssey', category: 'minivan', passengers: 8, doors: 4, ac: true },
-  { slug: 'yaris', name: 'Toyota Yaris', category: 'compact', passengers: 5, doors: 4, ac: true },
-  { slug: 'accent', name: 'Hyundai Accent', category: 'compact', passengers: 5, doors: 4, ac: true },
-  { slug: 'hilux', name: 'Toyota Hilux', category: 'pickup', passengers: 5, doors: 4, ac: true },
-  { slug: 'ranger', name: 'Ford Ranger', category: 'pickup', passengers: 5, doors: 4, ac: true }
+  // Compact / Hatchback
+  { slug: 'picanto', name: 'Kia Picanto', category: 'compact', passengers: 4, doors: 4, ac: true },
+  { slug: 'march', name: 'Nissan March', category: 'compact', passengers: 5, doors: 4, ac: true },
+  { slug: 'kwid', name: 'Renault Kwid', category: 'compact', passengers: 5, doors: 4, ac: true, manual: true },
+  { slug: 'onix-hb', name: 'Chevrolet Onix HB', category: 'compact', passengers: 5, doors: 4, ac: true },
+  { slug: 'golf', name: 'Volkswagen Golf', category: 'compact', passengers: 5, doors: 4, ac: true, popular: true },
+  // Sedan
+  { slug: 'onix', name: 'Chevrolet Onix', category: 'sedan', passengers: 5, doors: 4, ac: true },
+  { slug: 'rio', name: 'Kia Rio', category: 'sedan', passengers: 5, doors: 4, ac: true, popular: true },
+  { slug: 'versa', name: 'Nissan Versa', category: 'sedan', passengers: 5, doors: 4, ac: true },
+  { slug: 'mazda2', name: 'Mazda 2 Sedan', category: 'sedan', passengers: 5, doors: 4, ac: true },
+  { slug: 'mazda4', name: 'Mazda 4 Sedan', category: 'sedan', passengers: 5, doors: 4, ac: true },
+  // SUV
+  { slug: 'cx5', name: 'Mazda CX-5', category: 'suv', passengers: 5, doors: 4, ac: true, popular: true },
+  { slug: 'tracker', name: 'Chevrolet Tracker', category: 'suv', passengers: 5, doors: 4, ac: true },
+  { slug: 'sportage', name: 'Kia Sportage', category: 'suv', passengers: 5, doors: 4, ac: true },
+  { slug: 'koleos', name: 'Renault Koleos', category: 'suv', passengers: 5, doors: 4, ac: true },
+  // 4x4 / Large SUV
+  { slug: 'fortuner', name: 'Toyota Fortuner SW4', category: '4x4', passengers: 7, doors: 4, ac: true, popular: true },
+  { slug: '4runner', name: 'Toyota 4Runner', category: '4x4', passengers: 7, doors: 4, ac: true },
+  { slug: 'txl', name: 'Toyota TXL', category: '4x4', passengers: 7, doors: 4, ac: true },
+  { slug: 'trailblazer', name: 'Chevrolet Trailblazer', category: '4x4', passengers: 7, doors: 4, ac: true }
 ];
 
 const categories = {
   all:     { en: 'All Vehicles', es: 'Todos' },
+  compact: { en: 'Compact', es: 'Compactos' },
   sedan:   { en: 'Sedans', es: 'Sedanes' },
   suv:     { en: 'SUVs', es: 'SUVs' },
-  minivan: { en: 'Minivans', es: 'Minivanes' },
-  compact: { en: 'Compact', es: 'Compactos' },
-  pickup:  { en: 'Pickups', es: 'Pickups' }
+  '4x4':   { en: '4x4 / Large', es: '4x4 / Grandes' }
 };
 
 /* ===== Translations ===== */
@@ -34,22 +42,23 @@ const i18n = {
     'header.cta': 'Reserve Now',
     
     // Hero
-    'hero.badge': 'Trusted since 2010',
-    'hero.title': 'Car Rental in Heredia, Costa Rica',
-    'hero.subtitle': 'Premium vehicles, transparent pricing, and exceptional service. Airport pickup available.',
+    'hero.badge': 'Eje Cafetero, Colombia',
+    'hero.title': 'Car Rental in the Coffee Region',
+    'hero.subtitle': 'Premium vehicles for exploring Colombia\'s Eje Cafetero. Airport pickup at Pereira, Armenia & Manizales.',
     'hero.cta.primary': 'Reserve Your Vehicle',
     'hero.cta.secondary': 'View Fleet',
-    'trust.airport': 'SJO Airport Service',
-    'trust.airport.desc': 'Free pickup & drop-off',
+    'trust.airport': 'Multi-Airport Pickup',
+    'trust.airport.desc': 'Pereira, Armenia, Manizales',
     'trust.insurance': 'Full Insurance',
     'trust.insurance.desc': 'Comprehensive coverage included',
     'trust.support': '24/7 Support',
-    'trust.support.desc': 'WhatsApp assistance anytime',
+    'trust.support.desc': 'WhatsApp: 323 224 5812',
     
     // Fleet
     'fleet.title': 'Our Fleet',
-    'fleet.subtitle': 'Select the perfect vehicle for your Costa Rica adventure',
+    'fleet.subtitle': 'Select the perfect vehicle for your Eje Cafetero adventure',
     'fleet.note': 'Vehicle availability may vary. We\'ll confirm your specific vehicle after reviewing your request.',
+    'fleet.manual': 'Manual',
     'fleet.popular': 'Popular',
     'fleet.passengers': 'passengers',
     'fleet.doors': 'doors',
@@ -75,8 +84,10 @@ const i18n = {
     'form.return': 'Return Date',
     'form.pickupLoc': 'Pickup Location',
     'form.returnLoc': 'Return Location',
-    'form.loc.airport': 'SJO Airport',
-    'form.loc.office': 'Heredia Office',
+    'form.loc.pereira': 'Pereira Airport (PEI)',
+    'form.loc.armenia': 'Armenia Airport (AXM)',
+    'form.loc.manizales': 'Manizales Airport (MZL)',
+    'form.loc.office': 'Cartago Office',
     'form.vehicle': 'Preferred Vehicle',
     'form.vehicle.any': 'Any Available',
     'form.name': 'Full Name',
@@ -116,8 +127,10 @@ const i18n = {
     'success.close': 'Close',
     
     // Footer
-    'footer.tagline': 'Premium car rental in Costa Rica',
-    'footer.copy': '© 2024 Big Travel Rent A Car. All rights reserved.',
+    'footer.tagline': 'Premium car rental in Eje Cafetero, Colombia',
+    'footer.copy': '© 2026 Big Travel Rent A Car. All rights reserved.',
+    'footer.address': 'Calle 16 #5-46, Cartago, Valle del Cauca',
+    'footer.phone': 'WhatsApp: 323 224 5812',
     
     // Mobile CTA
     'mobile.cta': 'Reserve Now'
@@ -130,22 +143,23 @@ const i18n = {
     'header.cta': 'Reservar',
     
     // Hero
-    'hero.badge': 'Confianza desde 2010',
-    'hero.title': 'Alquiler de Autos en Heredia, Costa Rica',
-    'hero.subtitle': 'Vehículos premium, precios transparentes y servicio excepcional. Servicio de aeropuerto disponible.',
+    'hero.badge': 'Eje Cafetero, Colombia',
+    'hero.title': 'Alquiler de Autos en el Eje Cafetero',
+    'hero.subtitle': 'Vehículos premium para explorar el Eje Cafetero. Recogida en aeropuertos de Pereira, Armenia y Manizales.',
     'hero.cta.primary': 'Reserva Tu Vehículo',
     'hero.cta.secondary': 'Ver Flota',
-    'trust.airport': 'Servicio Aeropuerto SJO',
-    'trust.airport.desc': 'Entrega y recogida gratis',
+    'trust.airport': 'Multi-Aeropuerto',
+    'trust.airport.desc': 'Pereira, Armenia, Manizales',
     'trust.insurance': 'Seguro Completo',
     'trust.insurance.desc': 'Cobertura completa incluida',
     'trust.support': 'Soporte 24/7',
-    'trust.support.desc': 'Asistencia por WhatsApp',
+    'trust.support.desc': 'WhatsApp: 323 224 5812',
     
     // Fleet
     'fleet.title': 'Nuestra Flota',
-    'fleet.subtitle': 'Selecciona el vehículo perfecto para tu aventura',
+    'fleet.subtitle': 'Selecciona el vehículo perfecto para tu aventura en el Eje Cafetero',
     'fleet.note': 'La disponibilidad puede variar. Confirmaremos tu vehículo después de revisar tu solicitud.',
+    'fleet.manual': 'Manual',
     'fleet.popular': 'Popular',
     'fleet.passengers': 'pasajeros',
     'fleet.doors': 'puertas',
@@ -171,8 +185,10 @@ const i18n = {
     'form.return': 'Fecha de Devolución',
     'form.pickupLoc': 'Lugar de Recogida',
     'form.returnLoc': 'Lugar de Devolución',
-    'form.loc.airport': 'Aeropuerto SJO',
-    'form.loc.office': 'Oficina Heredia',
+    'form.loc.pereira': 'Aeropuerto Pereira',
+    'form.loc.armenia': 'Aeropuerto Armenia',
+    'form.loc.manizales': 'Aeropuerto Manizales',
+    'form.loc.office': 'Oficina Cartago',
     'form.vehicle': 'Vehículo Preferido',
     'form.vehicle.any': 'Cualquier Disponible',
     'form.name': 'Nombre Completo',
@@ -212,8 +228,10 @@ const i18n = {
     'success.close': 'Cerrar',
     
     // Footer
-    'footer.tagline': 'Alquiler de autos premium en Costa Rica',
-    'footer.copy': '© 2024 Big Travel Rent A Car. Todos los derechos reservados.',
+    'footer.tagline': 'Alquiler de autos premium en el Eje Cafetero, Colombia',
+    'footer.copy': '© 2026 Big Travel Rent A Car. Todos los derechos reservados.',
+    'footer.address': 'Calle 16 #5-46, Cartago, Valle del Cauca',
+    'footer.phone': 'WhatsApp: 323 224 5812',
     
     // Mobile CTA
     'mobile.cta': 'Reservar Ahora'
@@ -323,23 +341,10 @@ async function discoverImages(slug) {
   const extensions = ['webp', 'jpg', 'png'];
   
   // Try main image
-  for (const ext of extensions) {
-    const url = `assets/cars/${slug}.${ext}`;
-    if (await imageExists(url)) {
-      images.push(url);
-      break;
-    }
-  }
-  
-  // Try numbered variants (slug-1, slug-2, etc.)
-  for (let i = 1; i <= 5; i++) {
-    for (const ext of extensions) {
-      const url = `assets/cars/${slug}-${i}.${ext}`;
-      if (await imageExists(url)) {
-        images.push(url);
-        break;
-      }
-    }
+  // Only check webp for speed - no numbered variants to minimize requests
+  const url = `assets/cars/${slug}.webp`;
+  if (await imageExists(url)) {
+    images.push(url);
   }
   
   carImages[slug] = images;

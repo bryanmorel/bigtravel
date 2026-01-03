@@ -227,11 +227,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initLang();
   renderCategoryTabs();
+  setupObserver();
   renderFleet();
   initStepper();
   initDatePickers();
   updateAllText();
-  setupObserver();
 });
 
 /* ===== Theme ===== */
@@ -355,6 +355,11 @@ function createCarCard(car) {
 /* ===== Lazy Image Loading ===== */
 let observer;
 function setupObserver() {
+  if (typeof window === 'undefined') return;
+  if (!('IntersectionObserver' in window)) {
+    observer = null;
+    return;
+  }
   observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -368,7 +373,13 @@ function setupObserver() {
 }
 
 function observeCard(card) {
-  if (observer) observer.observe(card);
+  if (observer) {
+    observer.observe(card);
+    return;
+  }
+
+  // Fallback: if IntersectionObserver isn't available, load immediately.
+  if (card?.dataset?.slug) loadCarImages(card.dataset.slug);
 }
 
 async function loadCarImages(slug) {

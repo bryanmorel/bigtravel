@@ -69,12 +69,13 @@ const i18n = {
     'form.pickupDate': 'Pickup Date',
     'form.returnDate': 'Return Date',
     'form.pickupLocation': 'Pickup Location',
+    'form.differentDropoff': 'Return at a different location',
     'form.dropoffLocation': 'Drop-off Location',
     'form.transmission': 'Transmission',
     'form.automatic': 'Automatic',
     'form.manual': 'Manual',
     'form.any': 'No preference',
-    'form.passengers': 'Passengers',
+    'form.sevenSeats': 'I need 7 seats',
     'form.luggage': 'Luggage',
     'form.luggage.small': 'Small (1-2 bags)',
     'form.luggage.medium': 'Medium (3-4 bags)',
@@ -87,6 +88,8 @@ const i18n = {
     'form.required': 'This field is required',
     'form.invalidEmail': 'Please enter a valid email',
     'form.invalidDate': 'Return date must be after pickup',
+    'form.contactHint': 'Please provide at least email or phone',
+    'form.contactRequired': 'Please provide email or phone',
     'review.title': 'Review Your Request',
     'review.vehicle': 'Vehicle',
     'review.dates': 'Dates',
@@ -149,12 +152,13 @@ const i18n = {
     'form.pickupDate': 'Fecha de Recogida',
     'form.returnDate': 'Fecha de Devolución',
     'form.pickupLocation': 'Lugar de Recogida',
+    'form.differentDropoff': 'Entregar en un lugar diferente',
     'form.dropoffLocation': 'Lugar de Devolución',
     'form.transmission': 'Transmisión',
     'form.automatic': 'Automática',
     'form.manual': 'Manual',
     'form.any': 'Sin preferencia',
-    'form.passengers': 'Pasajeros',
+    'form.sevenSeats': 'Necesito 7 asientos',
     'form.luggage': 'Equipaje',
     'form.luggage.small': 'Pequeño (1-2 maletas)',
     'form.luggage.medium': 'Mediano (3-4 maletas)',
@@ -167,6 +171,8 @@ const i18n = {
     'form.required': 'Este campo es requerido',
     'form.invalidEmail': 'Por favor ingresa un email válido',
     'form.invalidDate': 'La fecha de devolución debe ser posterior',
+    'form.contactHint': 'Por favor proporciona al menos email o teléfono',
+    'form.contactRequired': 'Por favor proporciona email o teléfono',
     'review.title': 'Revisa Tu Solicitud',
     'review.vehicle': 'Vehículo',
     'review.dates': 'Fechas',
@@ -231,8 +237,29 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFleet();
   initStepper();
   initDatePickers();
+  initDifferentDropoff();
   updateAllText();
 });
+
+/* ===== Different Dropoff Toggle ===== */
+function initDifferentDropoff() {
+  const checkbox = document.getElementById('differentDropoff');
+  const dropoffField = document.getElementById('dropoffField');
+  const dropoffSelect = document.getElementById('dropoffLocation');
+  
+  if (!checkbox || !dropoffField) return;
+  
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      dropoffField.hidden = false;
+      dropoffSelect.required = true;
+    } else {
+      dropoffField.hidden = true;
+      dropoffSelect.required = false;
+      dropoffSelect.value = '';
+    }
+  });
+}
 
 /* ===== Theme ===== */
 function initTheme() {
@@ -519,6 +546,9 @@ function initStepper() {
   const submitBtn = document.getElementById('submitBtn');
   const form = document.getElementById('reservationForm');
 
+  // Ensure submit button is hidden on initial load
+  if (submitBtn) submitBtn.hidden = true;
+
   prevBtn?.addEventListener('click', () => goToStep(currentStep - 1));
   nextBtn?.addEventListener('click', () => {
     if (validateCurrentStep()) {
@@ -531,6 +561,9 @@ function initStepper() {
   // Set initial preferred language based on current lang
   const langSelect = document.getElementById('language');
   if (langSelect) langSelect.value = lang;
+
+  // Initialize step 1 state
+  goToStep(1);
 }
 
 function goToStep(step) {
@@ -579,7 +612,7 @@ function validateCurrentStep() {
       valid = false;
       field.classList.add('error');
       if (error) error.textContent = t('form.required');
-    } else if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) {
+    } else if (field.type === 'email' && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) {
       valid = false;
       field.classList.add('error');
       if (error) error.textContent = t('form.invalidEmail');
@@ -598,6 +631,28 @@ function validateCurrentStep() {
     }
   }
 
+  // Contact validation on step 4 - require email OR phone
+  if (currentStep === 4) {
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const hint = document.querySelector('.contact-hint');
+    
+    if (!email.value && !phone.value) {
+      valid = false;
+      email.classList.add('error');
+      phone.classList.add('error');
+      if (hint) {
+        hint.classList.add('error-text');
+        hint.textContent = t('form.contactRequired');
+      }
+    } else {
+      if (hint) {
+        hint.classList.remove('error-text');
+        hint.textContent = t('form.contactHint');
+      }
+    }
+  }
+
   return valid;
 }
 
@@ -609,7 +664,8 @@ function updateReviewSummary() {
   const pickup = form.pickupDate.value;
   const ret = form.returnDate.value;
   const pickupLoc = form.pickupLocation.value;
-  const dropoffLoc = form.dropoffLocation.value;
+  const differentDropoff = form.differentDropoff?.checked;
+  const dropoffLoc = differentDropoff ? form.dropoffLocation.value : pickupLoc;
 
   container.innerHTML = `
     <h4 data-i18n="review.title">${t('review.title')}</h4>
@@ -624,20 +680,41 @@ function updateReviewSummary() {
 function initDatePickers() {
   const pickup = document.getElementById('pickupDate');
   const ret = document.getElementById('returnDate');
-  if (!pickup || !ret) return;
+  if (!pickup || !ret || typeof flatpickr === 'undefined') return;
 
-  const today = new Date().toISOString().split('T')[0];
-  pickup.min = today;
-  ret.min = today;
+  const today = new Date();
+  const locale = lang === 'es' ? 'es' : 'default';
 
-  pickup.addEventListener('change', () => {
-    if (pickup.value) {
-      const next = new Date(pickup.value);
-      next.setDate(next.getDate() + 1);
-      ret.min = next.toISOString().split('T')[0];
-      if (ret.value && ret.value < ret.min) ret.value = '';
+  // Pickup date picker
+  const pickupPicker = flatpickr(pickup, {
+    locale: locale,
+    dateFormat: 'd/m/Y',
+    minDate: today,
+    disableMobile: false,
+    allowInput: false,
+    onChange: function(selectedDates) {
+      if (selectedDates.length > 0) {
+        const minReturn = new Date(selectedDates[0]);
+        minReturn.setDate(minReturn.getDate() + 1);
+        returnPicker.set('minDate', minReturn);
+        if (ret._flatpickr?.selectedDates[0] < minReturn) {
+          returnPicker.clear();
+        }
+      }
     }
   });
+
+  // Return date picker
+  const returnPicker = flatpickr(ret, {
+    locale: locale,
+    dateFormat: 'd/m/Y',
+    minDate: today,
+    disableMobile: false,
+    allowInput: false
+  });
+
+  // Store pickers for language updates
+  window.datePickers = { pickup: pickupPicker, return: returnPicker };
 }
 
 /* ===== Form Submit ===== */
@@ -657,9 +734,9 @@ async function handleSubmit(e) {
     pickupDate: form.pickupDate.value,
     returnDate: form.returnDate.value,
     pickupLocation: form.pickupLocation.value,
-    dropoffLocation: form.dropoffLocation.value,
+    dropoffLocation: form.differentDropoff?.checked ? form.dropoffLocation.value : form.pickupLocation.value,
     transmission: form.transmission.value,
-    passengers: form.passengers.value,
+    sevenSeats: form.sevenSeats?.checked || false,
     luggage: form.luggage.value,
     name: form.name.value,
     email: form.email.value,

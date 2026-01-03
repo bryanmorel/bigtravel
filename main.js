@@ -384,7 +384,16 @@ async function loadCarImages(slug) {
 
 async function discoverImages(slug) {
   const images = [];
-  const extensions = ['webp', 'jpg', 'jpeg', 'png'];
+  const extensions = ['webp', 'jpg', 'jpeg', 'png', 'svg'];
+
+  // Also support a single non-numbered image (e.g., kia-picanto.webp)
+  for (const ext of extensions) {
+    const url = `assets/cars/${slug}.${ext}`;
+    if (await imageExists(url)) {
+      images.push(url);
+      break;
+    }
+  }
 
   for (let i = 1; i <= 5; i++) {
     for (const ext of extensions) {

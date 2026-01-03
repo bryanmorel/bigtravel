@@ -395,19 +395,21 @@ async function loadCarImages(slug) {
 
 async function discoverImages(slug) {
   const images = [];
-  const extensions = ['webp', 'jpg', 'jpeg', 'png', 'svg'];
+  // Prefer real photos (raster formats) only.
+  // SVGs are reserved for a single generic placeholder to avoid awkward scaling/text.
+  const photoExtensions = ['webp', 'jpg', 'jpeg', 'png'];
 
   // Also support a single non-numbered image (e.g., kia-picanto.webp)
-  for (const ext of extensions) {
+  for (const ext of photoExtensions) {
     const url = `assets/cars/${slug}.${ext}`;
     if (await imageExists(url)) {
       images.push(url);
-      break;
+      return images;
     }
   }
 
   for (let i = 1; i <= 5; i++) {
-    for (const ext of extensions) {
+    for (const ext of photoExtensions) {
       const url = `assets/cars/${slug}-${i}.${ext}`;
       if (await imageExists(url)) {
         images.push(url);
@@ -415,6 +417,8 @@ async function discoverImages(slug) {
       }
     }
   }
+
+  if (images.length === 0) return ['assets/cars/placeholder.svg'];
   return images;
 }
 
